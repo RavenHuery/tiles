@@ -5,8 +5,7 @@
 using namespace std;
 
 class tileType {
-    protected:
-
+    public:
     //Class constructor
     tileType();
 
@@ -18,13 +17,16 @@ class tileType {
 
     //pure virtual isNumber function
     virtual bool isNumber()=0;
-}
+
+    protected:
+    int value; //tile number. If <0 then its empty
+    int ref; //reference to place on board
+};
 
 class emptyTile : public tileType {
-    protected: 
-
+    public: 
     //class constructor
-    emptyTile();
+    emptyTile(int r);
 
     //class destructor
     ~emptyTile();
@@ -34,13 +36,12 @@ class emptyTile : public tileType {
 
     //isNumber function returns false because it is not a number
     bool isNumber();
-}
+};
 
 class numberTile : public tileType {
-    protected: 
-
+    public: 
     //class constructor
-    numberTile();
+    numberTile(int r, int v);
 
     //class destructor
     ~numberTile();
@@ -50,4 +51,7 @@ class numberTile : public tileType {
 
     //isNumber function returns true because it is a number
     bool isNumber();
-}
+
+    //get the numerical value of tile
+    int getValue();
+};
