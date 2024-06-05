@@ -20,3 +20,11 @@ moveTile::isLegal(tileType a, tileType b) {
 
     
 }
+
+moveTile::spaceFree(tileType a, tileType b) {
+
+}
+
+moveTile::isAdjacent(tileType a, tileType b) {
+
+}
