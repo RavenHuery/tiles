@@ -35,7 +35,7 @@ bool emptyTile::isNumber() {
     return false;
 }
 
-numberTile::numberTile(int r = 0, int v = 0) {
+numberTile::numberTile(int v = 0, int r = 0) {
     setRef(r);
     setVal(v);
 }
