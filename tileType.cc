@@ -6,9 +6,25 @@
 
 using namespace std;
 
-emptyTile::emptyTile(int r) {
-    value = -1;
+int tileType::getValue() {
+    return value;
+}
+
+void tileType::setVal(int v = 0) {
+    value = v;
+}
+
+int tileType::getRef() {
+    return ref;
+}
+
+void tileType::setRef(int r = 0) {
     ref = r;
+}
+
+emptyTile::emptyTile(int r = 0) {
+    setVal(-1);
+    setRef(r);
 }
 
 bool emptyTile::isEmpty() {
@@ -19,9 +35,9 @@ bool emptyTile::isNumber() {
     return false;
 }
 
-numberTile::numberTile(int r, int v = 1) {
-    ref = r;
-    value = v;
+numberTile::numberTile(int r = 0, int v = 0) {
+    setRef(r);
+    setVal(v);
 }
 
 bool numberTile::isEmpty() {
@@ -30,8 +46,4 @@ bool numberTile::isEmpty() {
 
 bool numberTile::isNumber() {
     return true;
-}
-
-int numberTile::getValue() {
-    return value;
 }

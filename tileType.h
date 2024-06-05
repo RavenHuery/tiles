@@ -18,6 +18,18 @@ class tileType {
     //pure virtual isNumber function
     virtual bool isNumber()=0;
 
+    //get the numerical value of tile
+    int getValue();
+
+    //get the reference number of the tile
+    int getRef();
+
+    //Sets the numerical value of the tile
+    void setVal(int v);
+
+    //Sets the reference point on board for tile
+    void setRef(int r);
+
     protected:
     int value; //tile number. If <0 then its empty
     int ref; //reference to place on board
@@ -51,7 +63,4 @@ class numberTile : public tileType {
 
     //isNumber function returns true because it is a number
     bool isNumber();
-
-    //get the numerical value of tile
-    int getValue();
 };
