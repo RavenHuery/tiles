@@ -20,6 +20,7 @@ enum tileNum {
 };
 
 board::board() {
+    //Create all the tiles
     numberTile one(1);
     numberTile two(2);
     numberTile three(3);
@@ -29,6 +30,18 @@ board::board() {
     numberTile seven(7);
     numberTile eight(8);
     emptyTile empty();
+    //add them to vector in no particular order
+    order.push_back(one);
+    order.push_back(two);
+    order.push_back(three);
+    order.push_back(four);
+    order.push_back(five);
+    order.push_back(six);
+    order.push_back(seven);
+    order.push_back(eight);
+    order.push_back(empty);
+    //set tile order using function
+    setOrder();
 }
 
 void board::printBoard() {

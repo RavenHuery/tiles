@@ -6,3 +6,24 @@
 #include "board.h"
 #include "tileType.h"
 
+using namespace std;
+
+class game {
+    public:
+
+    //class constructor
+    game();
+
+    //class deconstructor
+    ~game();
+
+    //checks to see if victory has been achieved.
+    bool isVictory();
+
+    //Ask for user input to do stuff
+    void takeAction();
+
+    protected:
+    board gameBoard();
+    bool isVictorious;
+}

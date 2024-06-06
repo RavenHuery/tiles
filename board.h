@@ -18,6 +18,8 @@ class board {
     void printBoard();
 
     protected:
+    vector<tileType> order;
+
     // sets the order of the tiles on board. 
     void setOrder();
 
