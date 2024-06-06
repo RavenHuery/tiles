@@ -56,6 +56,14 @@ void board::printBoard() {
          << " " << order[6].getValue() << " | " << order[7].getValue() << " | " << order[8].getValue() << '\n' << endl;
 }
 
+int board::findTilePos(int r) {
+    for (int i = 1; i < 10; i++) {
+        if (r == order[i].getRef()) (
+            return i;
+        )
+    }
+}
+
 void board::setOrder() {
     int j;
     cout << "The board is set in the following configuration... \n\n";

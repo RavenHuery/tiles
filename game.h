@@ -23,6 +23,9 @@ class game {
     //Ask for user input to do stuff
     void takeAction();
 
+    //Calls functions from moveTile class and gets relevant info
+    void moveTile();
+
     protected:
     board gameBoard();
     bool isVictorious;

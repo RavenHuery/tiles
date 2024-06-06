@@ -7,6 +7,7 @@ using namespace std;
 
 class board {
     public: 
+    vector<tileType> order;
 
     // class constructor
     board();
@@ -17,8 +18,10 @@ class board {
     // display board via cout
     void printBoard();
 
+    //Find a tile's position in vector given a Ref
+    int findTilePos(int);
+
     protected:
-    vector<tileType> order;
 
     // sets the order of the tiles on board. 
     void setOrder();

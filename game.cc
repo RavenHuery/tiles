@@ -49,3 +49,20 @@ void game::takeAction() {
         }
     } while (isVictorious == false);
 }
+
+void game::moveTile() {
+    moveTile move(); 
+    //Need a function to search for tiles in the vector
+    int refA, refB, posA, posB;
+    cout << "\nWhat tile would you like to move?\n";
+         << "Input tile position as an integer (i.e. 1, 2, 3, 4, 5, 6, 7, 8, 9): ";
+    cin >> refA;
+    cout << "\nWhere would you like that tile to go?\n";
+         << "Input tile position as an integer (i.e. 1, 2, 3, 4, 5, 6, 7, 8, 9): ";
+    cin >> refB;
+    //find tile positions in vector
+    posA = gameBoard.findTilePos(refA);
+    posB = gameBoard.findTilePos(refB);
+    
+    move.shiftTyle(gameBoard.order[posA], gameBoard.order[posB]);
+}
