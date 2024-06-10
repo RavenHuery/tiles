@@ -66,3 +66,14 @@ void game::moveTile() {
     
     move.shiftTyle(gameBoard.order[posA], gameBoard.order[posB]);
 }
+
+void game::playGame() {
+    char ans;
+    do {
+        cout << "Would you like to play a game? (y/n) ";
+        cin >> ans;
+    } while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
+    if (ans == 'y' || ans == 'Y') {
+        cout << "game playing sounds" << endl;
+    }
+}

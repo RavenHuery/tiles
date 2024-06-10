@@ -26,6 +26,9 @@ class game {
     //Calls functions from moveTile class and gets relevant info
     void moveTile();
 
+    //Calls to start the game
+    void playGame();
+
     protected:
     board gameBoard();
     bool isVictorious;

@@ -10,6 +10,7 @@
 using namespace std;
 
 int main() {
-
+    game theGame();
+    theGame.playGame();
     return 0;
 }
