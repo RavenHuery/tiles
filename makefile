@@ -1,3 +1,13 @@
+CXX = g++
+
+CXXFLAGS = -Wall -Wextra -std=c++11
+
+game.o: game.cpp
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # Compiler
 CXX = g++
 
@@ -5,7 +15,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11
 
 # Source files
-SRCS = game.cc board.cc moveTile.cc tileType.cc main.cc
+SRCS = game.cc board.cc moveTile.cc tileType.cc
 
 # Object files
 OBJS = $(SRCS:.cc=.o)
@@ -21,7 +31,8 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Rule to build object files
-%.o: %.cc $(HDRS)
+#%.o: %.cc $(HDRS)
+$(OBJS): %.o: %.cc
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 # Rule to clean the generated files
