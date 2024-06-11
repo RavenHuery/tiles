@@ -13,10 +13,10 @@ class tileType {
     ~tileType();
 
     //pure virtual isEmpty function
-    virtual bool isEmpty()=0;
+    virtual bool isEmpty();
 
     //pure virtual isNumber function
-    virtual bool isNumber()=0;
+    virtual bool isNumber();
 
     //get the numerical value of tile
     int getValue();

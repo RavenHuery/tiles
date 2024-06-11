@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <vector>
 
+#include "tileType.h"
+
 using namespace std;
 
 class board {

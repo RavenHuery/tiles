@@ -2,9 +2,8 @@
 
 #include <iomanip>
 #include <vector>
-#include "moveTile.h"
-#include "board.h"
-#include "tileType.h"
+#include <iostream>
+
 #include "game.h"
 
 using namespace std;
@@ -74,6 +73,6 @@ void game::playGame() {
         cin >> ans;
     } while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
     if (ans == 'y' || ans == 'Y') {
-        cout << "game playing sounds" << endl;
+        cout << "game playing sounds" << std::endl;
     }
 }

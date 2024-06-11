@@ -6,6 +6,14 @@
 
 using namespace std;
 
+bool tileType::isEmpty() {
+    return true;
+}
+
+bool tileType::isNumber() {
+    return true;
+}
+
 int tileType::getValue() {
     return value;
 }
