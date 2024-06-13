@@ -7,17 +7,17 @@
 
 using namespace std;
 
-enum tileNum {
-    1 = one,
-    2 = two,
-    3 = three,
-    4 = four,
-    5 = five,
-    6 = six,
-    7 = seven,
-    8 = eight,
-    9 = nine,
-};
+// enum tileNum { //this does not work lol
+//     1 = one,
+//     2 = two,
+//     3 = three,
+//     4 = four,
+//     5 = five,
+//     6 = six,
+//     7 = seven,
+//     8 = eight,
+//     9 = nine,
+// };
 
 board::board() {
     //Create all the tiles
@@ -74,23 +74,43 @@ void board::setOrder() {
          << " <TILE 7> | <TILE 8> | <TILE 9> \n" << endl;
     
 
-    //I am unsure if this could even work but its worth a shot. Enums are very epic imo.
-    for (int i = 1; i < 10; i++) {
-        enum tileNum seq;
-        seq = i;
-        cout << "Please enter the numerical value for TILE " << i;
-             << ". If the empty tile is there, input a \"-1\"... " << endl;
-        cin >> j;
-        seq.setVal(j);
-    }
+    //Takes the tile position and asks for num value. However, it assumes tile 9 is empty!
+    //May need to change so it sets ref based on num value
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
+    cin >> j;
+    one.setRef(j);
 
-    // cout << "Please enter the numerical value for TILE 1. If the empty tile is there, input a \"-1\"... " << endl;
-    // cin >> uno;
-    // one.setVal(uno);
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
+    cin >> j;
+    two.setRef(j);
 
-    // cout <<"Please enter the numerical value for TILE 2. If the empty tile is there, input a \"-1\"... " << endl;
-    // cin >> dos;
-    // one.setVal(dos);
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '3' on it ..." << endl;
+    cin >> j;
+    three.setRef(j);
+
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '4' on it ..." << endl;
+    cin >> j;
+    four.setRef(j);
+
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '5' on it ..." << endl;
+    cin >> j;
+    five.setRef(j);
+
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '6' on it ..." << endl;
+    cin >> j;
+    six.setRef(j);
+
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '7' on it ..." << endl;
+    cin >> j;
+    seven.setRef(j);
+
+    cout << "\n\nPlease enter the position (1-9) of the tile with a '8' on it ..." << endl;
+    cin >> j;
+    eight.setRef(j);
+
+    cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
+    cin >> j;
+    empty.setRef(j);
 }
 
 vector<tileType> board::getOrder() {

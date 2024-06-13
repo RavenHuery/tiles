@@ -9,6 +9,7 @@
 
 #include "game.h"
 #include "board.h"
+#include "moveTile.h"
 
 using namespace std;
 
