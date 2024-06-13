@@ -35,6 +35,11 @@ emptyTile::emptyTile(int r = 0) {
     setRef(r);
 }
 
+emptyTile::emptyTile() {
+    setVal(-1);
+    setRef(0);
+}
+
 bool emptyTile::isEmpty() {
     return true;
 }
@@ -45,6 +50,11 @@ bool emptyTile::isNumber() {
 
 numberTile::numberTile(int v = 0, int r = 0) {
     setRef(r);
+    setVal(v);
+}
+
+numberTile::numberTile(int v = 0) {
+    setRef(0);
     setVal(v);
 }
 

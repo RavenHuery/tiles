@@ -49,28 +49,28 @@ void board::printBoard() {
     //Need a function to order all tiles in order of ref #
     vector<tileType> order (getOrder());
 
-    cout << " " << order[0].getValue() << " | " << order[1].getValue() << " | " << order[2].getValue() << '\n';
-         << "-----------\n";
-         << " " << order[3].getValue() << " | " << order[4].getValue() << " | " << order[5].getValue() << '\n';
-         << "-----------\n";
+    cout << " " << order[0].getValue() << " | " << order[1].getValue() << " | " << order[2].getValue() << '\n'
+         << "-----------\n"
+         << " " << order[3].getValue() << " | " << order[4].getValue() << " | " << order[5].getValue() << '\n'
+         << "-----------\n"
          << " " << order[6].getValue() << " | " << order[7].getValue() << " | " << order[8].getValue() << '\n' << endl;
 }
 
 int board::findTilePos(int r) {
     for (int i = 1; i < 10; i++) {
-        if (r == order[i].getRef()) (
+        if (r == order[i].getRef()) {
             return i;
-        )
+        }
     }
 }
 
 void board::setOrder() {
     int j;
-    cout << "The board is set in the following configuration... \n\n";
-         << " <TILE 1> | <TILE 2> | <TILE 3> \n";
-         << "--------------------------------\n";
-         << " <TILE 4> | <TILE 5> | <TILE 6> \n";
-         << "--------------------------------\n";
+    cout << "The board is set in the following configuration... \n\n"
+         << " <TILE 1> | <TILE 2> | <TILE 3> \n"
+         << "--------------------------------\n"
+         << " <TILE 4> | <TILE 5> | <TILE 6> \n"
+         << "--------------------------------\n"
          << " <TILE 7> | <TILE 8> | <TILE 9> \n" << endl;
     
 
@@ -78,43 +78,46 @@ void board::setOrder() {
     //May need to change so it sets ref based on num value
     cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
     cin >> j;
-    one.setRef(j);
+    order[1].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
     cin >> j;
-    two.setRef(j);
+    order[2].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '3' on it ..." << endl;
     cin >> j;
-    three.setRef(j);
+    order[3].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '4' on it ..." << endl;
     cin >> j;
-    four.setRef(j);
+    order[4].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '5' on it ..." << endl;
     cin >> j;
-    five.setRef(j);
+    order[5].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '6' on it ..." << endl;
     cin >> j;
-    six.setRef(j);
+    order[6].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '7' on it ..." << endl;
     cin >> j;
-    seven.setRef(j);
+    order[7].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '8' on it ..." << endl;
     cin >> j;
-    eight.setRef(j);
+    order[8].setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
     cin >> j;
-    empty.setRef(j);
+    order[9].setRef(j);
 }
 
+//Take in oldOrder as order vector class member
+//output newOrder in the form of a vector of tiles
+//Order tiles
 vector<tileType> board::getOrder() {
-    vector<tileType> order;
+    vector<tileType> newOrder;
     enum tileNum seq;
     for (int i = 1; i < 10; i++) { //i is the ref we want to add to vector
         for (int j = 1; j < 10; j++) { //j is the tile we are looking at via the enum
@@ -124,5 +127,5 @@ vector<tileType> board::getOrder() {
         }
     }
 
-    return order;
+    return newOrder;
 }

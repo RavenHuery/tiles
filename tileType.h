@@ -43,6 +43,8 @@ class emptyTile : public tileType {
     //class constructor
     emptyTile(int r);
 
+    emptyTile();
+
     //class destructor
     ~emptyTile();
 
@@ -57,6 +59,8 @@ class numberTile : public tileType {
     public: 
     //class constructor
     numberTile(int r, int v);
+
+    numberTile(int r);
 
     //class destructor
     ~numberTile();
