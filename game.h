@@ -24,12 +24,12 @@ class game {
     void takeAction();
 
     //Calls functions from moveTile class and gets relevant info
-    void moveTile();
+    void tileMove();
 
     //Calls to start the game
     void playGame();
 
     protected:
-    board gameBoard();
+    board gameBoard;
     bool isVictorious;
-}
+}; 
