@@ -1,5 +1,8 @@
 // Written by Raven Huery
 
+#ifndef BOARD_H
+#define BOARD_H
+
 #include <iomanip>
 #include <vector>
 
@@ -31,3 +34,5 @@ class board {
     //Gets the order of tiles based on ref number
     vector<tileType> getOrder();
 };
+
+#endif //BOARD_H

@@ -1,5 +1,8 @@
 // Written by Raven Huery
 
+#ifndef TILE_TYPE_H
+#define TILE_TYPE_H
+
 #include <iomanip>
 
 using namespace std;
@@ -64,3 +67,5 @@ class numberTile : public tileType {
     //isNumber function returns true because it is a number
     bool isNumber();
 };
+
+#endif //TILE_TYPE_H

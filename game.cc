@@ -1,5 +1,8 @@
 //Written by Raven Huery
 
+#ifndef GAME_H
+#define GAME_H
+
 #include <iomanip>
 #include <vector>
 #include <iostream>
@@ -77,3 +80,5 @@ void game::playGame() {
         cout << "game playing sounds" << std::endl;
     }
 }
+
+#endif //GAME_H

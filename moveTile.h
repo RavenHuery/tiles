@@ -2,8 +2,7 @@
 
 #include <iomanip>
 #include <vector>
-#include "board.h"
-#include "tileType.h"
+
 
 using namespace std;
 

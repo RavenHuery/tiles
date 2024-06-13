@@ -1,5 +1,8 @@
 //Written by Raven Huery
 
+#ifndef MOVE_TILE_H
+#define MOVE_TILE_H
+
 #include <iomanip>
 #include <vector>
 #include <iostream>
@@ -46,3 +49,5 @@ bool moveTile::isAdjacent(tileType a, tileType b) {
         return true;
     return false;
 }
+
+#endif //MOVE_TILE_H
