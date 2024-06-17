@@ -122,19 +122,19 @@ void board::setOrder() {
     order[9]->setRef(j);
 }
 
-//Take in oldOrder as order vector class member
-//output newOrder in the form of a vector of tiles
-//Re-orders tiles in order of reference number
-vector<tileType*> board::getOrder() {
-    vector<tileType*> newOrder;
-    // enum tileNum seq;
-    for (int i = 1; i < 10; i++) { //i is the ref we want to add to vector
-        for (int j = 1; j < 10; j++) { //j is the tile we are looking at via the enum
-            seq = j;
-            if (seq.getRef() == i)
-                order.push_back(seq);
-        }
-    }
+// //Take in oldOrder as order vector class member
+// //output newOrder in the form of a vector of tiles
+// //Re-orders tiles in order of reference number
+// vector<tileType*> board::getOrder() {
+//     vector<tileType*> newOrder;
+//     // enum tileNum seq;
+//     for (int i = 1; i < 10; i++) { //i is the ref we want to add to vector
+//         for (int j = 1; j < 10; j++) { //j is the tile we are looking at via the enum
+//             seq = j;
+//             if (seq.getRef() == i)
+//                 order.push_back(seq);
+//         }
+//     }
 
-    return newOrder;
-}
+//     return newOrder;
+// }
