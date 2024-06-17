@@ -13,7 +13,7 @@ class tileType {
     tileType();
 
     //class destructor
-    ~tileType();
+    virtual ~tileType();
 
     //pure virtual isEmpty function
     virtual bool isEmpty();

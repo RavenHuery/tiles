@@ -12,7 +12,7 @@ using namespace std;
 
 class board {
     public: 
-    vector<tileType> order;
+    vector<tileType*> order;
 
     // class constructor
     board();
@@ -32,7 +32,8 @@ class board {
     void setOrder();
 
     //Gets the order of tiles based on ref number
-    vector<tileType> getOrder();
+    //A vector of pointers!
+    vector<tileType*> getOrder();
 };
 
 #endif //BOARD_H

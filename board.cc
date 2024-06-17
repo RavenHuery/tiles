@@ -21,15 +21,16 @@ using namespace std;
 
 board::board() {
     //Create all the tiles
-    numberTile one(1);
-    numberTile two(2);
-    numberTile three(3);
-    numberTile four(4);
-    numberTile five(5);
-    numberTile six(6);
-    numberTile seven(7);
-    numberTile eight(8);
-    emptyTile empty();
+    numberTile* one = new numberTile(1);
+    numberTile* two = new numberTile(2);
+    numberTile* three = new numberTile(3);
+    numberTile* four = new numberTile(4);
+    numberTile* five = new numberTile(5);
+    numberTile* six = new numberTile(6);
+    numberTile* seven = new numberTile(7);
+    numberTile* eight = new numberTile(8);
+    emptyTile* empty = new emptyTile();
+
     //add them to vector in no particular order
     order.push_back(one);
     order.push_back(two);
@@ -44,24 +45,32 @@ board::board() {
     setOrder();
 }
 
+board::~board() {
+    for (auto t : order) {
+        delete t;
+    }
+    order.clear();
+}
+
 void board::printBoard() {
     cout << "The board goes here" << endl;
     //Need a function to order all tiles in order of ref #
-    vector<tileType> order (getOrder());
+    vector<tileType*> order (getOrder());
 
-    cout << " " << order[0].getValue() << " | " << order[1].getValue() << " | " << order[2].getValue() << '\n'
+    cout << " " << order[0]->getValue() << " | " << order[1]->getValue() << " | " << order[2]->getValue() << '\n'
          << "-----------\n"
-         << " " << order[3].getValue() << " | " << order[4].getValue() << " | " << order[5].getValue() << '\n'
+         << " " << order[3]->getValue() << " | " << order[4]->getValue() << " | " << order[5]->getValue() << '\n'
          << "-----------\n"
-         << " " << order[6].getValue() << " | " << order[7].getValue() << " | " << order[8].getValue() << '\n' << endl;
+         << " " << order[6]->getValue() << " | " << order[7]->getValue() << " | " << order[8]->getValue() << '\n' << endl;
 }
 
 int board::findTilePos(int r) {
-    for (int i = 1; i < 10; i++) {
-        if (r == order[i].getRef()) {
+    for (int i = 0; i < 9; i++) {
+        if (r == order[i]->getRef()) {
             return i;
         }
     }
+    return -1;
 }
 
 void board::setOrder() {
@@ -78,47 +87,47 @@ void board::setOrder() {
     //May need to change so it sets ref based on num value
     cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
     cin >> j;
-    order[1].setRef(j);
+    order[1]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
     cin >> j;
-    order[2].setRef(j);
+    order[2]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '3' on it ..." << endl;
     cin >> j;
-    order[3].setRef(j);
+    order[3]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '4' on it ..." << endl;
     cin >> j;
-    order[4].setRef(j);
+    order[4]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '5' on it ..." << endl;
     cin >> j;
-    order[5].setRef(j);
+    order[5]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '6' on it ..." << endl;
     cin >> j;
-    order[6].setRef(j);
+    order[6]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '7' on it ..." << endl;
     cin >> j;
-    order[7].setRef(j);
+    order[7]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '8' on it ..." << endl;
     cin >> j;
-    order[8].setRef(j);
+    order[8]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
     cin >> j;
-    order[9].setRef(j);
+    order[9]->setRef(j);
 }
 
 //Take in oldOrder as order vector class member
 //output newOrder in the form of a vector of tiles
-//Order tiles
-vector<tileType> board::getOrder() {
-    vector<tileType> newOrder;
-    enum tileNum seq;
+//Re-orders tiles in order of reference number
+vector<tileType*> board::getOrder() {
+    vector<tileType*> newOrder;
+    // enum tileNum seq;
     for (int i = 1; i < 10; i++) { //i is the ref we want to add to vector
         for (int j = 1; j < 10; j++) { //j is the tile we are looking at via the enum
             seq = j;
