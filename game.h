@@ -1,5 +1,8 @@
 //Written by Raven Huery
 
+#ifndef GAME_H
+#define GAME_H
+
 #include <iomanip>
 #include <vector>
 #include "board.h"
@@ -31,3 +34,5 @@ class game {
     board gameBoard;
     bool isVictorious;
 }; 
+
+#endif //GAME_H

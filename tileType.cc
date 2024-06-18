@@ -6,6 +6,13 @@
 
 using namespace std;
 
+tileType::tileType() {
+
+}
+tileType::~tileType() {
+    
+}
+
 bool tileType::isEmpty() {
     return true;
 }

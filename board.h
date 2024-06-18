@@ -33,7 +33,7 @@ class board {
 
     //Gets the order of tiles based on ref number
     //A vector of pointers!
-    vector<tileType*> getOrder();
+    //vector<tileType*> getOrder();
 };
 
 #endif //BOARD_H
