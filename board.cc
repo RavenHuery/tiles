@@ -7,17 +7,6 @@
 
 using namespace std;
 
-// enum tileNum { //this does not work lol
-//     1 = one,
-//     2 = two,
-//     3 = three,
-//     4 = four,
-//     5 = five,
-//     6 = six,
-//     7 = seven,
-//     8 = eight,
-//     9 = nine,
-// };
 
 board::board() {
     //Create all the tiles
@@ -55,7 +44,7 @@ board::~board() {
 void board::printBoard() {
     cout << "The board goes here" << endl;
     //Need a function to order all tiles in order of ref #
-    vector<tileType*> order (getOrder());
+    //vector<tileType*> order (getOrder());
 
     cout << " " << order[0]->getValue() << " | " << order[1]->getValue() << " | " << order[2]->getValue() << '\n'
          << "-----------\n"
@@ -125,7 +114,10 @@ void board::setOrder() {
 // //Take in oldOrder as order vector class member
 // //output newOrder in the form of a vector of tiles
 // //Re-orders tiles in order of reference number
-// vector<tileType*> board::getOrder() {
+
+
+// ~~~~~~~~DEBUG CODE BEFORE IMPLEMENTING~~~~~~~~~~~~
+vector<tileType*> board::getOrder() {
 //     vector<tileType*> newOrder;
 //     // enum tileNum seq;
 //     for (int i = 1; i < 10; i++) { //i is the ref we want to add to vector
@@ -137,4 +129,6 @@ void board::setOrder() {
 //     }
 
 //     return newOrder;
-// }
+    vector <tileType*> order; 
+    return order;
+}

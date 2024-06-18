@@ -5,12 +5,12 @@
 #include "game.h"
 #include "moveTile.h"
 #include "board.h"
-#include "tileType"
+#include "tileType.h"
 
 using namespace std;
 
 int main() {
-    game theGame();
+    game theGame;
     theGame.playGame();
     return 0;
 }

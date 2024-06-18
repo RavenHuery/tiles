@@ -1,8 +1,5 @@
 //Written by Raven Huery
 
-#ifndef GAME_H
-#define GAME_H
-
 #include <iomanip>
 #include <vector>
 #include <iostream>
@@ -24,9 +21,9 @@ game::~game() {
 
 bool game::isVictory() {
     for (int i = 1; i < 10; i++) {
-        if (gameBoard.order[i].getRef() != gameBoard.order[i].getValue()) { //if tile ref != tile value
+        if (gameBoard.order[i]->getRef() != gameBoard.order[i]->getValue()) { //if tile ref != tile value
             //check if tile is empty and if ref is 9. Thats where the empty tile should be
-            if ((gameBoard.order[i].isEmpty() == true) && (gameBoard.order[i].getRef() == 9)) { 
+            if ((gameBoard.order[i]->isEmpty() == true) && (gameBoard.order[i]->getRef() == 9)) { 
                 continue;
             }
             else {
@@ -81,5 +78,3 @@ void game::playGame() {
         cout << "game playing sounds" << std::endl;
     }
 }
-
-#endif //GAME_H

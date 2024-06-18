@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -Wextra -std=c++11
 SRCS = game.cc board.cc moveTile.cc tileType.cc main.cc
 
 # Object files
-OBJS = game.obj board.obj moveTile.obj tileType.obj
+OBJS = game.obj board.obj moveTile.obj tileType.obj main.obj
 
 # Header files
 HDRS = game.h board.h moveTile.h tileType.h
