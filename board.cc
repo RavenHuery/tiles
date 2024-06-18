@@ -78,6 +78,8 @@ void board::setOrder() {
     cin >> j;
     order[1]->setRef(j);
 
+    cout << "Tile with a 1 on it is set to " << order[1]->getRef() << endl;
+
     cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
     cin >> j;
     order[2]->setRef(j);
@@ -109,6 +111,9 @@ void board::setOrder() {
     cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
     cin >> j;
     order[9]->setRef(j);
+
+    //This is where it seg faults
+    cout << "The empty tile is set to " << order[9]->getRef() << endl;    
 }
 
 // //Take in oldOrder as order vector class member
