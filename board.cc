@@ -44,13 +44,18 @@ board::~board() {
 void board::printBoard() {
     cout << "\n------------------------------\n" << endl;
     //Need a function to order all tiles in order of ref #
-    //vector<tileType*> order (getOrder());
+    vector<tileType*> pOrder;
+    getOrder(order, pOrder);
 
-    cout << " " << order[0]->getValue() << " | " << order[1]->getValue() << " | " << order[2]->getValue() << '\n'
+    //This function prints the board in order of vector position and NOT
+    //by order of ref #. 
+    //I need to create a seperate vector sorted by ref # and use that to print
+
+    cout << " " << pOrder[0]->getValue() << " | " << pOrder[1]->getValue() << " | " << pOrder[2]->getValue() << '\n'
          << "-----------\n"
-         << " " << order[3]->getValue() << " | " << order[4]->getValue() << " | " << order[5]->getValue() << '\n'
+         << " " << pOrder[3]->getValue() << " | " << pOrder[4]->getValue() << " | " << pOrder[5]->getValue() << '\n'
          << "-----------\n"
-         << " " << order[6]->getValue() << " | " << order[7]->getValue() << " | " << order[8]->getValue() << '\n' << endl;
+         << " " << pOrder[6]->getValue() << " | " << pOrder[7]->getValue() << " | " << pOrder[8]->getValue() << '\n' << endl;
 }
 
 int board::findTilePos(int r) {
@@ -122,18 +127,11 @@ void board::setOrder() {
 
 
 // ~~~~~~~~DEBUG CODE BEFORE IMPLEMENTING~~~~~~~~~~~~
-vector<tileType*> board::getOrder() {
-//     vector<tileType*> newOrder;
-//     // enum tileNum seq;
-//     for (int i = 1; i < 10; i++) { //i is the ref we want to add to vector
-//         for (int j = 1; j < 10; j++) { //j is the tile we are looking at via the enum
-//             seq = j;
-//             if (seq.getRef() == i)
-//                 order.push_back(seq);
-//         }
-//     }
-
-//     return newOrder;
-    vector <tileType*> order; 
-    return order;
+void board::getOrder(vector<tileType*> mainOrder, vector<tileType*>& newOrder) {
+    for (int i = 1; i < 10; i++) { //i is the position of the new vector
+        for (int j = 0; j < 9; j++) { //j is the position of the main vector
+            if (mainOrder[j]->getRef() == i)
+                newOrder.push_back(mainOrder[j]);
+        }
+    }
 }

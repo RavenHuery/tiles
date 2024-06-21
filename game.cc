@@ -80,6 +80,8 @@ void game::tileMove() {
     move.shiftTile(gameBoard.order[posA], gameBoard.order[posB]);
 }
 
+//Segfault happens but onlt when the starting order is the winning order
+//WHAT DOES IT MEAN???
 void game::playGame() {
     char ans;
     do {
@@ -98,7 +100,7 @@ void game::playGame() {
         do {
             gameBoard.printBoard();
             takeAction();
-
+            cout << "isVictorious is set to " << isVictorious << endl;
         } while (isVictorious != true);
     }
 }
