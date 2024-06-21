@@ -33,6 +33,7 @@ class game {
     protected:
     board gameBoard;
     bool isVictorious;
+    bool giveUp;
 }; 
 
 #endif //GAME_H

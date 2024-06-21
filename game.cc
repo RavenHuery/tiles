@@ -12,6 +12,7 @@ using namespace std;
 
 game::game() {
     isVictorious = isVictory();
+    giveUp = false;
 
 }
 
@@ -20,15 +21,11 @@ game::~game() {
 }
 
 bool game::isVictory() {
-    for (int i = 1; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
         if (gameBoard.order[i]->getRef() != gameBoard.order[i]->getValue()) { //if tile ref != tile value
             //check if tile is empty and if ref is 9. Thats where the empty tile should be
-            if ((gameBoard.order[i]->isEmpty() == true) && (gameBoard.order[i]->getRef() == 9)) { 
-                continue;
-            }
-            else {
-                //empty tile is in wrong place or numerical tile value does not match ref. victory is not yet reached
-                return false; 
+            if ((gameBoard.order[i]->isEmpty() != true) || (gameBoard.order[i]->getRef() != 9)) { 
+                return false;
             }
         }
     }
@@ -61,6 +58,9 @@ void game::takeAction() {
         pMove.shiftTile(gameBoard.order[tileA], gameBoard.order[tileB]);
         cout << "Move has been made!" << endl;
     }
+    if (select == 'q' || select == 'Q') {
+        giveUp = true;
+    }
 }
 
 void game::tileMove() {
@@ -82,12 +82,12 @@ void game::tileMove() {
 
 //Segfault happens but onlt when the starting order is the winning order
 //WHAT DOES IT MEAN???
+//Looks like when player wins it segfaults
 void game::playGame() {
     char ans;
     do {
         cout << "Would you like to play a game? (y/n) ";
         cin >> ans;
-        //This loop creates an infinite loop, even if the input is y or n
         if (ans == 'y' || ans == 'Y') 
             break;
         if (ans == 'n' || ans == 'N')
@@ -97,10 +97,15 @@ void game::playGame() {
         isVictorious = isVictory();
         cout << "game playing sounds" << std::endl;
 
-        do {
+        while (isVictorious != true) {
             gameBoard.printBoard();
             takeAction();
-            cout << "isVictorious is set to " << isVictorious << endl;
-        } while (isVictorious != true);
+            if (giveUp == true) {
+                break;
+            }
+            isVictorious = isVictory();
+        };
+        if (isVictorious == true) 
+            cout << "Congratulations, you did it! \n\n\n" << endl;
     }
 }
