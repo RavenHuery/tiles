@@ -72,7 +72,7 @@ numberTile::numberTile(int v = 0) {
 }
 
 numberTile::~numberTile() {
-    //stuff gets destroyed here
+    //stuff gets destroyed herecd
 }
 
 bool numberTile::isEmpty() {

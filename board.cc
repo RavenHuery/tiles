@@ -76,44 +76,43 @@ void board::setOrder() {
     //May need to change so it sets ref based on num value
     cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
     cin >> j;
-    order[1]->setRef(j);
+    order[0]->setRef(j);
 
-    cout << "Tile with a 1 on it is set to " << order[1]->getRef() << endl;
+    cout << "Tile with a 1 on it is set to " << order[0]->getRef() << endl;
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
     cin >> j;
-    order[2]->setRef(j);
+    order[1]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '3' on it ..." << endl;
     cin >> j;
-    order[3]->setRef(j);
+    order[2]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '4' on it ..." << endl;
     cin >> j;
-    order[4]->setRef(j);
+    order[3]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '5' on it ..." << endl;
     cin >> j;
-    order[5]->setRef(j);
+    order[4]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '6' on it ..." << endl;
     cin >> j;
-    order[6]->setRef(j);
+    order[5]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '7' on it ..." << endl;
     cin >> j;
-    order[7]->setRef(j);
+    order[6]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the tile with a '8' on it ..." << endl;
     cin >> j;
-    order[8]->setRef(j);
+    order[7]->setRef(j);
 
     cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
     cin >> j;
-    order[9]->setRef(j);
+    order[8]->setRef(j);
 
-    //This is where it seg faults
-    cout << "The empty tile is set to " << order[9]->getRef() << endl;    
+    cout << "The empty tile is set to " << order[8]->getRef() << endl;    
 }
 
 // //Take in oldOrder as order vector class member
