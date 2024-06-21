@@ -42,7 +42,7 @@ board::~board() {
 }
 
 void board::printBoard() {
-    cout << "The board goes here" << endl;
+    cout << "\n------------------------------\n" << endl;
     //Need a function to order all tiles in order of ref #
     //vector<tileType*> order (getOrder());
 

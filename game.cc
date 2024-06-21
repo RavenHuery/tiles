@@ -37,14 +37,29 @@ bool game::isVictory() {
 
 void game::takeAction() {
     char select;
+    moveTile pMove;
     //do {
-        std::cout << "What move would you like to make?\n"
-             << "Select 'm' to move a tile\n"
-             << "Select 'q' to quit the program\n\n"
-             << "Input: ";
-        cin >> select;
-        if (select == 'm' || select == 'M') {
-           //IMPLEMENT SHIT HERE!!!
+    std::cout << "What move would you like to make?\n"
+         << "Select 'm' to move a tile\n"
+         << "Select 'q' to quit the program\n\n"
+         << "Input: ";
+    cin >> select;
+    if (select == 'm' || select == 'M') {
+        //IMPLEMENT SHIT HERE!!!
+        int posA, posB;
+        cout << "Please enter the position of the tile you would like to move...\n";
+        cin >> posA;
+        cout << "Please enter the position you would like to move the tile to...\n";
+        cin >> posB;
+
+        //find where in the vector the tile is...
+        int tileA = gameBoard.findTilePos(posA);
+        int tileB = gameBoard.findTilePos(posB);
+
+        //make the move
+
+        pMove.shiftTile(gameBoard.order[tileA], gameBoard.order[tileB]);
+        cout << "Move has been made!" << endl;
     }
 }
 

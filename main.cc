@@ -14,7 +14,3 @@ int main() {
     theGame.playGame();
     return 0;
 }
-
-//June 18, 2024
-//User is prompted to input board config and then program seg faults
-//board::setOrder() runs to create game board. 

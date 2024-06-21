@@ -22,6 +22,7 @@ void moveTile::shiftTile(tileType* a, tileType* b) {
         a->setRef(newA);
         b->setRef(newB);
         cout << "Shift has been completed!" << endl;
+        //This function doesn't actually work. COuld be an issue with the ordering...
     }
     else {
         cout << "You can't do that! That move is ILLEGAL! Try again... " << endl;
