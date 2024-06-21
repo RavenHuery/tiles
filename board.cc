@@ -112,6 +112,7 @@ void board::setOrder() {
     cin >> j;
     order[8]->setRef(j);
 
+    //If I don't use keypad it segfaults. WHY???
     cout << "The empty tile is set to " << order[8]->getRef() << endl;    
 }
 

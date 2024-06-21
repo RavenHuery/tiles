@@ -74,6 +74,10 @@ void game::playGame() {
         cout << "Would you like to play a game? (y/n) ";
         cin >> ans;
         //This loop creates an infinite loop, even if the input is y or n
+        if (ans == 'y' || ans == 'Y') 
+            break;
+        if (ans == 'n' || ans == 'N')
+            break;
     } while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
     if (ans == 'y' || ans == 'Y') {
         cout << "game playing sounds" << std::endl;
