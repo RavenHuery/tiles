@@ -37,18 +37,15 @@ bool game::isVictory() {
 
 void game::takeAction() {
     char select;
-    do {
+    //do {
         std::cout << "What move would you like to make?\n"
              << "Select 'm' to move a tile\n"
              << "Select 'q' to quit the program\n\n"
              << "Input: ";
         cin >> select;
         if (select == 'm' || select == 'M') {
-            //do stuff here
-        } else if (select == 'q' || select == 'Q') {
-            break;
-        }
-    } while (isVictorious == false);
+           //IMPLEMENT SHIT HERE!!!
+    }
 }
 
 void game::tileMove() {
@@ -80,6 +77,13 @@ void game::playGame() {
             break;
     } while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
     if (ans == 'y' || ans == 'Y') {
+        isVictorious = isVictory();
         cout << "game playing sounds" << std::endl;
+
+        do {
+            gameBoard.printBoard();
+            takeAction();
+
+        } while (isVictorious != true);
     }
 }
