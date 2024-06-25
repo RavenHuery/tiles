@@ -174,7 +174,7 @@ void board::adjAvailable(vector<int>& ava, int j) {
 
 bool board::inArray(vector<int>& ava, int j) {
     for (int i = 0; i < 9; i++) {
-        if (ava[1] == j)
+        if (ava[i] == j)
             return true;
     }
     return false;

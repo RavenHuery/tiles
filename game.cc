@@ -80,9 +80,6 @@ void game::tileMove() {
     move.shiftTile(gameBoard.order[posA], gameBoard.order[posB]);
 }
 
-//Segfault happens but onlt when the starting order is the winning order
-//WHAT DOES IT MEAN???
-//Looks like when player wins it segfaults
 void game::playGame() {
     char ans;
     do {

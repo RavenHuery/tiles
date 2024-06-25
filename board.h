@@ -35,8 +35,11 @@ class board {
     //A vector of pointers!
     void getOrder(vector<tileType*>, vector<tileType*>&);
 
+
+    //Checks if int is in array
     bool inArray(vector<int>&, int);
 
+    //Edits array so that int gets removed
     void adjAvailable(vector<int> &, int);
 };
 
