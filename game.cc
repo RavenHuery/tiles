@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <vector>
 #include <iostream>
+#include <string>
 
 #include "game.h"
 #include "board.h"
@@ -22,8 +23,7 @@ game::~game() {
 
 bool game::isVictory() {
     for (int i = 0; i < 9; i++) {
-        if (gameBoard.order[i]->getRef() != gameBoard.order[i]->getValue()) { //if tile ref != tile value
-            //check if tile is empty and if ref is 9. Thats where the empty tile should be
+        if (gameBoard.order[i]->getRef() != gameBoard.order[i]->getValue()) { 
             if ((gameBoard.order[i]->isEmpty() != true) || (gameBoard.order[i]->getRef() != 9)) { 
                 return false;
             }
@@ -33,19 +33,21 @@ bool game::isVictory() {
 }
 
 void game::takeAction() {
-    char select;
-    moveTile pMove;
-    //do {
+    string select;
     std::cout << "What move would you like to make?\n"
          << "Select 'm' to move a tile\n"
-         << "Select 'q' to quit the program\n\n"
+         << "Select 'q' to quit the program\n"
+         << "Select 'a' to get AI to solve the puzzle\n\n"
          << "Input: ";
     cin >> select;
-    if (select == 'm' || select == 'M') {
+    if (select == "m" || select == "M") {
         tileMove();
     }
-    if (select == 'q' || select == 'Q') {
+    if (select == "q" || select == "Q") {
         giveUp = true;
+    }
+    if (select == "a" || select == "A") {
+        cout << "AI algorithm sounds\n\n" << endl;
     }
 }
 
@@ -67,7 +69,6 @@ void game::tileMove() {
     int tileB = gameBoard.findTilePos(posB);
 
     //make the move
-
     move.shiftTile(gameBoard.order[tileA], gameBoard.order[tileB]);
 }
 

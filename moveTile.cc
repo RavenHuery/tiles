@@ -22,7 +22,6 @@ void moveTile::shiftTile(tileType* a, tileType* b) {
         a->setRef(newA);
         b->setRef(newB);
         cout << "Shift has been completed!" << endl;
-        //This function doesn't actually work. COuld be an issue with the ordering...
     }
     else {
         cout << "You can't do that! That move is ILLEGAL! Try again... " << endl;
@@ -30,8 +29,8 @@ void moveTile::shiftTile(tileType* a, tileType* b) {
 }
 
 bool moveTile::isLegal(tileType* a, tileType* b) {
-    bool freeSpace = spaceFree(a, b); //Is one empty and another numerical?
-    bool isAdj = isAdjacent(a, b); //Are the two tiles right next to each other?
+    bool freeSpace = spaceFree(a, b); 
+    bool isAdj = isAdjacent(a, b); 
     if (freeSpace == true && isAdj == true) 
         return true;
     return false;

@@ -30,6 +30,7 @@ board::board() {
     order.push_back(seven);
     order.push_back(eight);
     order.push_back(empty);
+    
     //set tile order using function
     setOrder();
 }
@@ -43,13 +44,9 @@ board::~board() {
 
 void board::printBoard() {
     cout << "\n------------------------------\n" << endl;
-    //Need a function to order all tiles in order of ref #
+
     vector<tileType*> pOrder;
     getOrder(order, pOrder);
-
-    //This function prints the board in order of vector position and NOT
-    //by order of ref #. 
-    //I need to create a seperate vector sorted by ref # and use that to print
 
     cout << " " << pOrder[0]->getValue() << " | " << pOrder[1]->getValue() << " | " << pOrder[2]->getValue() << '\n'
          << "-----------\n"
@@ -77,17 +74,12 @@ void board::setOrder() {
          << "--------------------------------\n"
          << " <TILE 7> | <TILE 8> | <TILE 9> \n" << endl;
     
-
-    //Takes the tile position and asks for num value. However, it assumes tile 9 is empty!
-    //May need to change so it sets ref based on num value
     do {
         cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
         cin >> j;
     } while (!inArray(spotAvailable, j));
     order[0]->setRef(j);
     adjAvailable(spotAvailable, j);
-
-    cout << "Tile with a 1 on it is set to " << order[0]->getRef() << endl;
 
     do {
         cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
@@ -143,18 +135,9 @@ void board::setOrder() {
         cin >> j;
     } while (!inArray(spotAvailable, j));
     order[8]->setRef(j);
-    adjAvailable(spotAvailable, j);
-
-    //If I don't use keypad it segfaults. WHY???
-    cout << "The empty tile is set to " << order[8]->getRef() << endl;    
+    adjAvailable(spotAvailable, j);  
 }
 
-// //Take in oldOrder as order vector class member
-// //output newOrder in the form of a vector of tiles
-// //Re-orders tiles in order of reference number
-
-
-// ~~~~~~~~DEBUG CODE BEFORE IMPLEMENTING~~~~~~~~~~~~
 void board::getOrder(vector<tileType*> mainOrder, vector<tileType*>& newOrder) {
     for (int i = 1; i < 10; i++) { //i is the position of the new vector
         for (int j = 0; j < 9; j++) { //j is the position of the main vector

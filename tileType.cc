@@ -7,12 +7,10 @@
 using namespace std;
 
 tileType::tileType() {
-    //Stuff happens here
     value = 0;
     ref = 0;
 }
 tileType::~tileType() {
-    //stuff happens here
 }
 
 bool tileType::isEmpty() {
@@ -50,7 +48,6 @@ emptyTile::emptyTile() {
 }
 
 emptyTile::~emptyTile() {
-    //stuff happens here
 }
 
 bool emptyTile::isEmpty() {
@@ -72,7 +69,6 @@ numberTile::numberTile(int v = 0) {
 }
 
 numberTile::~numberTile() {
-    //stuff gets destroyed herecd
 }
 
 bool numberTile::isEmpty() {
