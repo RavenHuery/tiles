@@ -34,6 +34,10 @@ class board {
     //Gets the order of tiles based on ref number
     //A vector of pointers!
     void getOrder(vector<tileType*>, vector<tileType*>&);
+
+    bool inArray(vector<int>&, int);
+
+    void adjAvailable(vector<int> &, int);
 };
 
 #endif //BOARD_H

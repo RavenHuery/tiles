@@ -69,6 +69,7 @@ int board::findTilePos(int r) {
 
 void board::setOrder() {
     int j;
+    vector<int> spotAvailable = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     cout << "The board is set in the following configuration... \n\n"
          << " <TILE 1> | <TILE 2> | <TILE 3> \n"
          << "--------------------------------\n"
@@ -79,43 +80,70 @@ void board::setOrder() {
 
     //Takes the tile position and asks for num value. However, it assumes tile 9 is empty!
     //May need to change so it sets ref based on num value
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '1' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[0]->setRef(j);
+    adjAvailable(spotAvailable, j);
 
     cout << "Tile with a 1 on it is set to " << order[0]->getRef() << endl;
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '2' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[1]->setRef(j);
+    adjAvailable(spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '3' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '3' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[2]->setRef(j);
+    adjAvailable(spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '4' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '4' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[3]->setRef(j);
+    adjAvailable (spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '5' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '5' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[4]->setRef(j);
+    adjAvailable (spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '6' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '6' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[5]->setRef(j);
+    adjAvailable (spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '7' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '7' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[6]->setRef(j);
+    adjAvailable (spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the tile with a '8' on it ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the tile with a '8' on it ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[7]->setRef(j);
+    adjAvailable(spotAvailable, j);
 
-    cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
-    cin >> j;
+    do {
+        cout << "\n\nPlease enter the position (1-9) of the empty tile ..." << endl;
+        cin >> j;
+    } while (!inArray(spotAvailable, j));
     order[8]->setRef(j);
+    adjAvailable(spotAvailable, j);
 
     //If I don't use keypad it segfaults. WHY???
     cout << "The empty tile is set to " << order[8]->getRef() << endl;    
@@ -134,4 +162,20 @@ void board::getOrder(vector<tileType*> mainOrder, vector<tileType*>& newOrder) {
                 newOrder.push_back(mainOrder[j]);
         }
     }
+}
+
+void board::adjAvailable(vector<int>& ava, int j) {
+    for (unsigned int i = 0; i < ava.size()-1; i++) {
+        if (ava[i] == j) {
+            ava.erase(ava.begin()+i);
+        }
+    }
+}
+
+bool board::inArray(vector<int>& ava, int j) {
+    for (int i = 0; i < 9; i++) {
+        if (ava[1] == j)
+            return true;
+    }
+    return false;
 }

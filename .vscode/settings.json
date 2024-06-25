@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "COMMIT_EDITMSG": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "iostream": "cpp"
     }
 }
