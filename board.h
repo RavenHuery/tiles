@@ -26,6 +26,12 @@ class board {
     //Find a tile's position in vector given a Ref
     int findTilePos(int);
 
+    //Checks if int is in array
+    bool inArray(vector<int>&, int);
+
+    //Edits array so that int gets removed
+    void adjAvailable(vector<int> &, int);
+
     protected:
 
     // sets the order of the tiles on board. 
@@ -34,13 +40,6 @@ class board {
     //Gets the order of tiles based on ref number
     //A vector of pointers!
     void getOrder(vector<tileType*>, vector<tileType*>&);
-
-
-    //Checks if int is in array
-    bool inArray(vector<int>&, int);
-
-    //Edits array so that int gets removed
-    void adjAvailable(vector<int> &, int);
 };
 
 #endif //BOARD_H

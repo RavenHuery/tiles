@@ -42,21 +42,7 @@ void game::takeAction() {
          << "Input: ";
     cin >> select;
     if (select == 'm' || select == 'M') {
-        //IMPLEMENT SHIT HERE!!!
-        int posA, posB;
-        cout << "Please enter the position of the tile you would like to move...\n";
-        cin >> posA;
-        cout << "Please enter the position you would like to move the tile to...\n";
-        cin >> posB;
-
-        //find where in the vector the tile is...
-        int tileA = gameBoard.findTilePos(posA);
-        int tileB = gameBoard.findTilePos(posB);
-
-        //make the move
-
-        pMove.shiftTile(gameBoard.order[tileA], gameBoard.order[tileB]);
-        cout << "Move has been made!" << endl;
+        tileMove();
     }
     if (select == 'q' || select == 'Q') {
         giveUp = true;
@@ -65,19 +51,24 @@ void game::takeAction() {
 
 void game::tileMove() {
     moveTile move; 
-    //Need a function to search for tiles in the vector
-    int refA, refB, posA, posB;
-    std::cout << "\nWhat tile would you like to move?\n"
-         << "Input tile position as an integer (i.e. 1, 2, 3, 4, 5, 6, 7, 8, 9): ";
-    std::cin >> refA;
-    std::cout << "\nWhere would you like that tile to go?\n"
-         << "Input tile position as an integer (i.e. 1, 2, 3, 4, 5, 6, 7, 8, 9): ";
-    std::cin >> refB;
-    //find tile positions in vector
-    posA = gameBoard.findTilePos(refA);
-    posB = gameBoard.findTilePos(refB);
-    
-    move.shiftTile(gameBoard.order[posA], gameBoard.order[posB]);
+    vector<int> legalNum = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int posA, posB;
+    do {
+        cout << "Please enter the position of the tile you would like to move...\n";
+        cin >> posA;
+    } while (!gameBoard.inArray(legalNum, posA));
+    do {
+        cout << "Please enter the position you would like to move the tile to...\n";
+        cin >> posB;
+    } while (!gameBoard.inArray(legalNum, posB));
+
+    //find where in the vector the tile is...
+    int tileA = gameBoard.findTilePos(posA);
+    int tileB = gameBoard.findTilePos(posB);
+
+    //make the move
+
+    move.shiftTile(gameBoard.order[tileA], gameBoard.order[tileB]);
 }
 
 void game::playGame() {
@@ -92,7 +83,6 @@ void game::playGame() {
     } while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
     if (ans == 'y' || ans == 'Y') {
         isVictorious = isVictory();
-        cout << "game playing sounds" << std::endl;
 
         while (isVictorious != true) {
             gameBoard.printBoard();
