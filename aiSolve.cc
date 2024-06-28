@@ -8,7 +8,37 @@
 
 using namespace std;
 
-aiSolve::aiSolve() {
+node::node(vector<tileType*> board, int g) {
+    for (int i = 0; i < 9; i++) {
+        state.push_back(board[i]);
+    }
+    f = h(state) + g;
+}
+
+node::~node() {
+    auto (t : state) {
+        delete t;
+    }
+    state.clear();
+}
+
+int node::h(vector<tileType*>& curState) {
+    int h = 0;
+    for (int i = 0; i < 9; i++) {
+        int n = curState[i]->getRef(); //current ref
+        int m = goalState[i]->getRef(); //goal ref
+        h = h + abs(n-m) + abs(n/3 - m/3);
+    }
+    return h;
+}
+
+int node::abs(int x) {
+    if (x < 0)
+        return x/-1;
+    return x;
+}
+
+aiSolve::aiSolve(vector<tileType*>& start) {
     //Create a new vector that is teh goal state of the search
     numberTile* one = new numberTile(1, 1);
     numberTile* two = new numberTile(2, 2);
@@ -29,6 +59,8 @@ aiSolve::aiSolve() {
     goalState.push_back(seven);
     goalState.push_back(eight);
     goalState.push_back(empty);
+
+    node* startState = new node(start, 0);
 }
 
 aiSolve::~aiSolve() {
@@ -40,20 +72,4 @@ aiSolve::~aiSolve() {
 
 bool aiSolve::aStar() {
 
-}
-
-int aiSolve::abs(int x) {
-    if (x < 0)
-        return x/-1;
-    return x;
-}
-
-int aiSolve::h(vector<tileType*>& curState) {
-    int h = 0;
-    for (int i = 0; i < 9; i++) {
-        int n = curState[i]->getRef(); //current ref
-        int m = goalState[i]->getRef(); //goal ref
-        h = h + abs(n-m) + abs(n/3 - m/3);
-    }
-    return h;
 }

@@ -93,7 +93,9 @@ void game::playGame() {
             }
             isVictorious = isVictory();
         };
-        if (isVictorious == true) 
-            cout << "Congratulations, you did it! \n\n\n" << endl;
+        if (isVictorious == true){
+            gameBoard.printBoard();
+            cout << "\n\n\nCongratulations, you did it! \n\n\n" << endl;
+        }
     }
 }
