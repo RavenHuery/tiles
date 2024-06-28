@@ -31,6 +31,13 @@ class aiSolve {
 
     private:
     vector<tileType*> goalState;
+
+    //Returns the absolute value
+    int abs(int);
+
+    //get h value for heuristic
+    int h(vector<tileType*>);
+
 };
 
 #endif //AI_H
