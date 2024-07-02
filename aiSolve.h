@@ -27,11 +27,18 @@ class node {
     //absolute value calculator
     int abs(int);
 
+    //Get number of successions
+    int getG();
+
     //Get node heuristic
     int getF();
 
+    //Set f value
+    void setF();
+
     vector<tileType*> state; //board state
     int f; //heuristic value
+    int g;
 }
 
 class aiSolve {
@@ -51,9 +58,9 @@ class aiSolve {
     //Count sum of tile distance away from starting position (g value)
     bool aStar(vector<tileType*>&);
 
-    //Function to get the heuristic value
-    //takes in the current and goal ref and returns the heuristic
-    int getHeuristic(int, int);
+    //Generate successor states from a given node
+    //Addes new states to openList
+    void genSucc(node);
 
     private:
     vector<tileType*> goalState;

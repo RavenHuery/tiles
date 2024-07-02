@@ -23,3 +23,13 @@ H() = <FOR ALL TILES> absolute_value(n - m) + absolute_value(n/3 - m/3)
 where 
     - n is the current reference value
     - m is the goal reference value
+
+
+~~~~~~~~~~~~~~~~~~~~GENERATING SUCCESSORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The empty tile can only go in at most 4 directions.
+ref + 1
+ref - 1
+ref + 3
+ref - 3
+If the new ref is out of range (i.e. < 1 or > 9) then it is invalid and should be ignored.

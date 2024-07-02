@@ -9,11 +9,12 @@
 
 using namespace std;
 
-node::node(vector<tileType*> board, int g) {
+node::node(vector<tileType*> board, int gValue) {
     for (int i = 0; i < 9; i++) {
         state.push_back(board[i]);
     }
-    f = h(state) + g;
+    g = gValue;
+    setF();
 }
 
 node::~node() {
@@ -39,8 +40,16 @@ int node::abs(int x) {
     return x;
 }
 
+int node::getG() {
+    return g;
+}
+
 int node::getF() {
     return f;
+}
+
+void node::setF() {
+    f = h(state) + g;
 }
 
 aiSolve::aiSolve(vector<tileType*>& start) {
@@ -103,7 +112,17 @@ bool aiSolve::aStar() {
         openList.erase(openList.begin+leastFpos);
 
         //Generate successors to q ~~NEED A FUNCTION THAT DOES THAT~~
+        genSucc(q, q.getG());
 
+        //for each successor
+        //a) if the successor is the goal then we are done
+        //b) compute g and h for successor (for f value)
+        //c) if node has the same positioning as one in openList with higher f value, skip this one!
+        //d) If successor has same pos as node in CLOSED list with lower f value, skip this one!
+        //</for>
+
+        //add q to closed list
+        
     }
 }
 
@@ -123,29 +142,33 @@ void aiSolve::genSucc(node parent, int parentG) {
 
     //generate ref - 3
     if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
-        node upNode(parent, parentG);
+        node upNode(parent, parentG + 1);
         moveOp.shiftTile(upNode.state[emptyRef], upNode.state[emptyRef - 3]);
+        upNode.setF();
         up = true;
     }
 
     //generate ref - 1
     if (emptyRef != 1 || emptyRef != 4 || emptyRef != 7) {
-        node leftNode(parent, parentG);
+        node leftNode(parent, parentG + 1);
         moveOp.shiftTile(leftNode.state[emptyRef], leftNode.state[emptyRef - 1]);
+        leftNode.setF();
         left = true;
     }
 
     //generate ref + 1
     if (emptyRef != 3 || emptyRef != 6 || emptyRef != 9) {
-        node rightNode(parent, parentG);
+        node rightNode(parent, parentG + 1);
         moveOp.shiftTile(rightNode.state[emptyRef], rightNode.state[emptyRef +1]);
+        rightNode.setF();
         right = true;
     }
 
     //generate ref + 3
     if (emptyRef != 7 || emptyTile != 8 || emptyTile != 9) {
-        node downNode(parent, parentG);
+        node downNode(parent, parentG + 1);
         moveOp.shiftTile(downNode.state[emptyRef], downNode.state[emptyRef + 3]);
+        downNode.setF();
         down = true;
     }
 
