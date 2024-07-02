@@ -29,8 +29,16 @@ class aiSolve {
     //Count sum of tile distance away from starting position (g value)
     bool aStar(vector<tileType*>&);
 
+    //Function to get the heuristic value
+    //takes in the current and goal ref and returns the heuristic
+    int getHeuristic(int, int);
+
     private:
     vector<tileType*> goalState;
+
+    //absolute value calculator
+    
+    int abs(int);
 };
 
 #endif //AI_H
