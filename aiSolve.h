@@ -12,11 +12,30 @@
 
 using namespace std;
 
+class node {
+    public:
+    //constructor that copies a board and generates
+    //a heuristic value using the g value
+    node(vector<tileType*>, int);
+
+    //destructor
+    ~node();
+
+    //get h value for heuristic
+    int h(vector<tileType*>);
+
+    //absolute value calculator
+    int abs(int);
+
+    vector<tileType*> state; //board state
+    int f; //heuristic value
+}
+
 class aiSolve {
     public:
 
     //class constructor
-    aiSolve();
+    aiSolve(vector<tileType*> &);
 
     //destructor
     ~aiSolve();
@@ -35,10 +54,16 @@ class aiSolve {
 
     private:
     vector<tileType*> goalState;
+<<<<<<< HEAD
 
     //absolute value calculator
     
     int abs(int);
+=======
+    node startState;
+    vector<node> openList;
+    vector<node> closedList;
+>>>>>>> 4860e2ee2d1f9c27d8f2acefe3ddbad99dbb9844
 };
 
 #endif //AI_H
