@@ -1,0 +1,25 @@
+Heuristic is each numberTile's manhattan distance away from goal state
+
+1 | 2 | 3
+----------
+4 | 5 | _ 
+----------
+7 | 8 | 6
+
+would have a heuristic value of 1
+
+
+2 | 4 | 5
+----------
+8 | _ | 1 
+----------
+7 | 3 | 6
+
+1 + 2 + 2 + 2 + 3 + 0 + 3 + 1 = 14
+
+NEED A MATH FUNCTION TO CALCULATE H()
+
+H() = <FOR ALL TILES> absolute_value(n - m) + absolute_value(n/3 - m/3)
+where 
+    - n is the current reference value
+    - m is the goal reference value
