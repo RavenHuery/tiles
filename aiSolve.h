@@ -27,6 +27,9 @@ class node {
     //absolute value calculator
     int abs(int);
 
+    //Get node heuristic
+    int getF();
+
     vector<tileType*> state; //board state
     int f; //heuristic value
 }
@@ -54,16 +57,9 @@ class aiSolve {
 
     private:
     vector<tileType*> goalState;
-<<<<<<< HEAD
-
-    //absolute value calculator
-    
-    int abs(int);
-=======
     node startState;
     vector<node> openList;
     vector<node> closedList;
->>>>>>> 4860e2ee2d1f9c27d8f2acefe3ddbad99dbb9844
 };
 
 #endif //AI_H
