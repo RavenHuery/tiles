@@ -5,13 +5,13 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11
 
 # Source files
-SRCS = game.cc board.cc moveTile.cc tileType.cc main.cc
+SRCS = game.cc board.cc moveTile.cc tileType.cc aiSolve.cc main.cc 
 
 # Object files
-OBJS = game.obj board.obj moveTile.obj tileType.obj main.obj
+OBJS = game.obj board.obj moveTile.obj tileType.obj aiSolve.obj main.obj
 
 # Header files
-HDRS = game.h board.h moveTile.h tileType.h
+HDRS = game.h board.h moveTile.h tileType.h aiSolve.h
 
 # Executable name
 TARGET = game

@@ -9,16 +9,27 @@
 
 using namespace std;
 
-node::node(vector<tileType*> board, int gValue) {
+//Does not compile. My guess is that we have two constructors with the same amount of params
+//Try making a default that accepts zero params
+
+node::node(vector<tileType*> board, vector<tileType*>& goal, int gVal) {
     for (int i = 0; i < 9; i++) {
         state.push_back(board[i]);
     }
-    g = gValue;
-    setF();
+    g = gVal;
+    setF(goal);
+}
+
+node::node(node copyNode, vector<tileType*>& goal, int gVal) {
+    for (int i = 0; i < 9; i++) {
+        state.push_back(copyNode.state[i]);
+    }
+    g = gVal;
+    setF(goal);
 }
 
 node::~node() {
-    auto (t : state) {
+    for (auto t : state) {
         delete t;
     }
     state.clear();
@@ -48,8 +59,8 @@ int node::getF() {
     return f;
 }
 
-void node::setF() {
-    f = h(state) + g;
+void node::setF(vector<tileType*>& goal) {
+    f = h(state, goal) + g;
 }
 
 aiSolve::aiSolve(vector<tileType*>& start) {
@@ -74,7 +85,7 @@ aiSolve::aiSolve(vector<tileType*>& start) {
     goalState.push_back(eight);
     goalState.push_back(empty);
 
-    node* startState = new node(start, 0);
+    node startState(start, goalState, 0);
 }
 
 aiSolve::~aiSolve() {
@@ -99,7 +110,7 @@ bool aiSolve::aStar() {
         //Find node with lowest heuristic value
         int leastF = INT_MAX; 
         int leastFpos;
-        for (int i = 0; i < openList.size(); i++) {
+        for (unsigned int i = 0; i < openList.size(); i++) {
             if (openList[i].getF() < leastF) {
                 leastF = openList[i].getF();
                 leastFpos = i;
@@ -109,10 +120,10 @@ bool aiSolve::aStar() {
         node q = openList[leastFpos];
 
         //pop q from open list
-        openList.erase(openList.begin+leastFpos);
+        openList.erase(openList.begin()+leastFpos);
 
         //Generate successors to q ~~NEED A FUNCTION THAT DOES THAT~~
-        genSucc(q, q.getG());
+        genSucc(q, goalState, q.getG());
 
         //for each successor
         //a) if the successor is the goal then we are done
@@ -124,13 +135,13 @@ bool aiSolve::aStar() {
         //add q to closed list
         
     }
+    return false;
 }
 
 //Generate children with a given parent UwU
-void aiSolve::genSucc(node parent, int parentG) {
+void aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
     //Find emptyTile in parent.state
     int emptyRef;
-    bool up = false, down = false, left = false, right = false;
     moveTile moveOp;
     for (int i = 0; i < 9; i++) {
         if (parent.state[i]->getValue() == -1) {
@@ -142,43 +153,36 @@ void aiSolve::genSucc(node parent, int parentG) {
 
     //generate ref - 3
     if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
-        node upNode(parent, parentG + 1);
+        node upNode(parent, goal, parentG + 1);
         moveOp.shiftTile(upNode.state[emptyRef], upNode.state[emptyRef - 3]);
-        upNode.setF();
-        up = true;
+        upNode.setF(goal);
+        openList.push_back(upNode);
     }
 
     //generate ref - 1
     if (emptyRef != 1 || emptyRef != 4 || emptyRef != 7) {
-        node leftNode(parent, parentG + 1);
+        node leftNode(parent, goal, parentG + 1);
         moveOp.shiftTile(leftNode.state[emptyRef], leftNode.state[emptyRef - 1]);
-        leftNode.setF();
-        left = true;
+        leftNode.setF(goal);
+        openList.push_back(leftNode);
     }
 
     //generate ref + 1
     if (emptyRef != 3 || emptyRef != 6 || emptyRef != 9) {
-        node rightNode(parent, parentG + 1);
+        node rightNode(parent, goal, parentG + 1);
         moveOp.shiftTile(rightNode.state[emptyRef], rightNode.state[emptyRef +1]);
-        rightNode.setF();
-        right = true;
+        rightNode.setF(goal);
+        openList.push_back(rightNode);
     }
 
     //generate ref + 3
-    if (emptyRef != 7 || emptyTile != 8 || emptyTile != 9) {
-        node downNode(parent, parentG + 1);
+    if (emptyRef != 7 || emptyRef != 8 || emptyRef != 9) {
+        node downNode(parent, goal, parentG + 1);
         moveOp.shiftTile(downNode.state[emptyRef], downNode.state[emptyRef + 3]);
-        downNode.setF();
-        down = true;
+        downNode.setF(goal);
+        openList.push_back(downNode);
     }
 
     //create new nodes based on the new refs, add to openList
-    if (up == true)
-        openList.push_back(upNode);
-    if (down == true)
-        openList.push_back(downNode);
-    if (left == true)
-        openList.push_back(leftNode);
-    if (right == true)
-        openList.push_back(rightNode);
+    
 }

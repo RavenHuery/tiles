@@ -12,17 +12,21 @@
 
 using namespace std;
 
-class node {
+class node{
     public:
     //constructor that copies a board and generates
     //a heuristic value using the g value
-    node(vector<tileType*>, int);
+    node(vector<tileType*>&, vector<tileType*>&, int);
+
+    //constructor that copies a board and generates
+    //a heuristic value using the g value
+    node(node, vector<tileType*>&, int);
 
     //destructor
     ~node();
 
     //get h value for heuristic
-    int h(vector<tileType*>);
+    int h(vector<tileType*>&, vector<tileType*>&);
 
     //absolute value calculator
     int abs(int);
@@ -34,18 +38,18 @@ class node {
     int getF();
 
     //Set f value
-    void setF();
+    void setF(vector<tileType*>&);
 
     vector<tileType*> state; //board state
     int f; //heuristic value
     int g;
-}
+};
 
-class aiSolve {
+class aiSolve{
     public:
 
     //class constructor
-    aiSolve(vector<tileType*> &);
+    aiSolve(vector<tileType*>&);
 
     //destructor
     ~aiSolve();
@@ -56,11 +60,11 @@ class aiSolve {
     //from its correct position (h value)
     //........................................
     //Count sum of tile distance away from starting position (g value)
-    bool aStar(vector<tileType*>&);
+    bool aStar();
 
     //Generate successor states from a given node
     //Addes new states to openList
-    void genSucc(node);
+    void genSucc(node, vector<tileType*>&, int);
 
     private:
     vector<tileType*> goalState;
