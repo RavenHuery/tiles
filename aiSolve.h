@@ -14,6 +14,8 @@ using namespace std;
 
 class node{
     public:
+
+    node();
     //constructor that copies a board and generates
     //a heuristic value using the g value
     node(vector<tileType*>&, vector<tileType*>&, int);
@@ -34,11 +36,19 @@ class node{
     //Get number of successions
     int getG();
 
+    //set G value
+    void setG(int);
+
     //Get node heuristic
     int getF();
 
     //Set f value
     void setF(vector<tileType*>&);
+
+    vector<tileType*> getBoard();
+
+    //Function to set node state space
+    void setBoard(vector<tileType*>);
 
     vector<tileType*> state; //board state
     int f; //heuristic value
@@ -49,7 +59,7 @@ class aiSolve{
     public:
 
     //class constructor
-    aiSolve(vector<tileType*>&);
+    aiSolve();
 
     //destructor
     ~aiSolve();
@@ -60,7 +70,7 @@ class aiSolve{
     //from its correct position (h value)
     //........................................
     //Count sum of tile distance away from starting position (g value)
-    bool aStar();
+    bool aStar(vector<tileType*>);
 
     //Generate successor states from a given node
     //Addes new states to openList

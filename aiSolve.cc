@@ -12,19 +12,43 @@ using namespace std;
 //Does not compile. My guess is that we have two constructors with the same amount of params
 //Try making a default that accepts zero params
 
+//Node needs a "set board" function
+
+node::node() {
+    setG(0);
+    vector<tileType*> newBoard;
+    numberTile* one = new numberTile(1, 1);
+    numberTile* two = new numberTile(2, 2);
+    numberTile* three = new numberTile(3, 3);
+    numberTile* four = new numberTile(4, 4);
+    numberTile* five = new numberTile(5, 5);
+    numberTile* six = new numberTile(6, 6);
+    numberTile* seven = new numberTile(7, 7);
+    numberTile* eight = new numberTile(8, 8);
+    emptyTile* empty = new emptyTile(9);
+
+    newBoard.push_back(one);
+    newBoard.push_back(two);
+    newBoard.push_back(three);
+    newBoard.push_back(four);
+    newBoard.push_back(five);
+    newBoard.push_back(six);
+    newBoard.push_back(seven);
+    newBoard.push_back(eight);
+    newBoard.push_back(empty);
+    setBoard(newBoard);
+    setF(newBoard);
+}
+
 node::node(vector<tileType*>& board, vector<tileType*>& goal, int gVal) {
-    for (int i = 0; i < 9; i++) {
-        state.push_back(board[i]);
-    }
-    g = gVal;
+    setBoard(board);
+    setG(gVal);
     setF(goal);
 }
 
 node::node(node copyNode, vector<tileType*>& goal, int gVal) {
-    for (int i = 0; i < 9; i++) {
-        state.push_back(copyNode.state[i]);
-    }
-    g = gVal;
+    setBoard(copyNode.getBoard());
+    setG(gVal);
     setF(goal);
 }
 
@@ -55,6 +79,10 @@ int node::getG() {
     return g;
 }
 
+void node::setG(int newG) {
+    g = newG;
+}
+
 int node::getF() {
     return f;
 }
@@ -63,10 +91,20 @@ void node::setF(vector<tileType*>& goal) {
     f = h(state, goal) + g;
 }
 
+vector<tileType*> node::getBoard() {
+    return state;
+}
+
+void node::setBoard(vector<tileType*> newBoard) {
+    for (int i = 0; i < 9; i++) {
+        state.push_back(newBoard[i]);
+    }
+}
+
 //When the vector is creating StartState node it does not have the required parameters!
 //This constructor needs to be changed
-aiSolve::aiSolve(vector<tileType*>& startBoard) {
-    //Create a new vector that is teh goal state of the search
+aiSolve::aiSolve() {
+    //Create a new vector that is the goal state of the search
     numberTile* one = new numberTile(1, 1);
     numberTile* two = new numberTile(2, 2);
     numberTile* three = new numberTile(3, 3);
@@ -86,8 +124,6 @@ aiSolve::aiSolve(vector<tileType*>& startBoard) {
     goalState.push_back(seven);
     goalState.push_back(eight);
     goalState.push_back(empty);
-
-    node startState(startBoard, goalState, 0);
 }
 
 aiSolve::~aiSolve() {
@@ -97,9 +133,12 @@ aiSolve::~aiSolve() {
     goalState.clear();
 }
 
-bool aiSolve::aStar() {
+bool aiSolve::aStar(vector<tileType*> startBoard) {
     //Initialize Open List
     // -Done during class constructor
+    startState.setBoard(startBoard);
+    startState.setG(0);
+    startState.setF(startBoard);
 
     //Initialize closed list
     // -Done during class constructor
