@@ -12,7 +12,7 @@ using namespace std;
 //Does not compile. My guess is that we have two constructors with the same amount of params
 //Try making a default that accepts zero params
 
-node::node(vector<tileType*> board, vector<tileType*>& goal, int gVal) {
+node::node(vector<tileType*>& board, vector<tileType*>& goal, int gVal) {
     for (int i = 0; i < 9; i++) {
         state.push_back(board[i]);
     }
@@ -63,7 +63,9 @@ void node::setF(vector<tileType*>& goal) {
     f = h(state, goal) + g;
 }
 
-aiSolve::aiSolve(vector<tileType*>& start) {
+//When the vector is creating StartState node it does not have the required parameters!
+//This constructor needs to be changed
+aiSolve::aiSolve(vector<tileType*>& startBoard) {
     //Create a new vector that is teh goal state of the search
     numberTile* one = new numberTile(1, 1);
     numberTile* two = new numberTile(2, 2);
@@ -85,7 +87,7 @@ aiSolve::aiSolve(vector<tileType*>& start) {
     goalState.push_back(eight);
     goalState.push_back(empty);
 
-    node startState(start, goalState, 0);
+    node startState(startBoard, goalState, 0);
 }
 
 aiSolve::~aiSolve() {
