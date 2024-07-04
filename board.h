@@ -17,8 +17,14 @@ class board {
     // class constructor
     board();
 
+    //constructor for aiSolve
+    board(int);
+
     // class deconstructor
     ~board();
+
+    //overloaded == operator for boards
+    bool operator==(board);
 
     // display board via cout
     void printBoard();

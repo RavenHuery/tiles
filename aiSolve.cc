@@ -16,7 +16,7 @@ using namespace std;
 
 node::node() {
     setG(0);
-    vector<tileType*> newBoard;
+    board newBoard(9);
     numberTile* one = new numberTile(1, 1);
     numberTile* two = new numberTile(2, 2);
     numberTile* three = new numberTile(3, 3);
@@ -27,43 +27,43 @@ node::node() {
     numberTile* eight = new numberTile(8, 8);
     emptyTile* empty = new emptyTile(9);
 
-    newBoard.push_back(one);
-    newBoard.push_back(two);
-    newBoard.push_back(three);
-    newBoard.push_back(four);
-    newBoard.push_back(five);
-    newBoard.push_back(six);
-    newBoard.push_back(seven);
-    newBoard.push_back(eight);
-    newBoard.push_back(empty);
-    setBoard(newBoard);
+    newBoard.order.push_back(one);
+    newBoard.order.push_back(two);
+    newBoard.order.push_back(three);
+    newBoard.order.push_back(four);
+    newBoard.order.push_back(five);
+    newBoard.order.push_back(six);
+    newBoard.order.push_back(seven);
+    newBoard.order.push_back(eight);
+    newBoard.order.push_back(empty);
+    setBoard(newBoard.order);
     setF(newBoard);
 }
 
-node::node(vector<tileType*>& board, vector<tileType*>& goal, int gVal) {
-    setBoard(board);
+node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
+    setBoard(newBoard);
     setG(gVal);
     setF(goal);
 }
 
-node::node(node copyNode, vector<tileType*>& goal, int gVal) {
-    setBoard(copyNode.getBoard());
+node::node(node copyNode, board& goal, int gVal) {
+    setBoard(copyNode.getBoard().order);
     setG(gVal);
     setF(goal);
 }
 
 node::~node() {
-    for (auto t : state) {
+    for (auto t : state.order) {
         delete t;
     }
-    state.clear();
+    state.order.clear();
 }
 
-int node::h(vector<tileType*>& curState, vector<tileType*>& goalState) {
+int node::h(board& curState, board& goalState) {
     int h = 0;
     for (int i = 0; i < 9; i++) {
-        int n = curState[i]->getRef(); //current ref
-        int m = goalState[i]->getRef(); //goal ref
+        int n = curState.order[i]->getRef(); //current ref
+        int m = goalState.order[i]->getRef(); //goal ref
         h = h + abs(n-m) + abs(n/3 - m/3);
     }
     return h;
@@ -87,17 +87,17 @@ int node::getF() {
     return f;
 }
 
-void node::setF(vector<tileType*>& goal) {
+void node::setF(board& goal) {
     f = h(state, goal) + g;
 }
 
-vector<tileType*> node::getBoard() {
+board node::getBoard() {
     return state;
 }
 
 void node::setBoard(vector<tileType*> newBoard) {
     for (int i = 0; i < 9; i++) {
-        state.push_back(newBoard[i]);
+        state.order.push_back(newBoard[i]);
     }
 }
 
@@ -115,22 +115,22 @@ aiSolve::aiSolve() {
     numberTile* eight = new numberTile(8, 8);
     emptyTile* empty = new emptyTile(9);
 
-    goalState.push_back(one);
-    goalState.push_back(two);
-    goalState.push_back(three);
-    goalState.push_back(four);
-    goalState.push_back(five);
-    goalState.push_back(six);
-    goalState.push_back(seven);
-    goalState.push_back(eight);
-    goalState.push_back(empty);
+    goalState.order.push_back(one);
+    goalState.order.push_back(two);
+    goalState.order.push_back(three);
+    goalState.order.push_back(four);
+    goalState.order.push_back(five);
+    goalState.order.push_back(six);
+    goalState.order.push_back(seven);
+    goalState.order.push_back(eight);
+    goalState.order.push_back(empty);
 }
 
 aiSolve::~aiSolve() {
-    for (auto t : goalState) {
+    for (auto t : goalState.order) {
         delete t;
     }
-    goalState.clear();
+    goalState.order.clear();
 }
 
 bool aiSolve::aStar(vector<tileType*> startBoard) {
@@ -138,7 +138,7 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
     // -Done during class constructor
     startState.setBoard(startBoard);
     startState.setG(0);
-    startState.setF(startBoard);
+    startState.setF(startBoard.state.order);
 
     //Initialize closed list
     // -Done during class constructor
@@ -159,14 +159,18 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
         }
         //Call the current node q
         node q = openList[leastFpos];
+        //Print board of q
 
         //pop q from open list
         openList.erase(openList.begin()+leastFpos);
 
-        //Generate successors to q ~~NEED A FUNCTION THAT DOES THAT~~
-        genSucc(q, goalState, q.getG());
+        //Generate successors to q 
+        int n = genSucc(q, goalState, q.getG());
 
         //for each successor
+        for (int i = 0; i < n; i++) {
+            if (children[i].getBoard() == goalState.getBoard()) //need overloaded == operator
+        }
         //a) if the successor is the goal then we are done
         //b) compute g and h for successor (for f value)
         //c) if node has the same positioning as one in openList with higher f value, skip this one!
@@ -180,8 +184,9 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
 }
 
 //Generate children with a given parent UwU
-void aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
+int aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
     //Find emptyTile in parent.state
+    int n = 0;
     int emptyRef;
     moveTile moveOp;
     for (int i = 0; i < 9; i++) {
@@ -197,7 +202,8 @@ void aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
         node upNode(parent, goal, parentG + 1);
         moveOp.shiftTile(upNode.state[emptyRef], upNode.state[emptyRef - 3]);
         upNode.setF(goal);
-        openList.push_back(upNode);
+        children.push_back(upNode);
+        n++;
     }
 
     //generate ref - 1
@@ -205,7 +211,8 @@ void aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
         node leftNode(parent, goal, parentG + 1);
         moveOp.shiftTile(leftNode.state[emptyRef], leftNode.state[emptyRef - 1]);
         leftNode.setF(goal);
-        openList.push_back(leftNode);
+        children.push_back(leftNode);
+        n++;
     }
 
     //generate ref + 1
@@ -213,7 +220,8 @@ void aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
         node rightNode(parent, goal, parentG + 1);
         moveOp.shiftTile(rightNode.state[emptyRef], rightNode.state[emptyRef +1]);
         rightNode.setF(goal);
-        openList.push_back(rightNode);
+        children.push_back(rightNode);
+        n++;
     }
 
     //generate ref + 3
@@ -221,7 +229,8 @@ void aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
         node downNode(parent, goal, parentG + 1);
         moveOp.shiftTile(downNode.state[emptyRef], downNode.state[emptyRef + 3]);
         downNode.setF(goal);
-        openList.push_back(downNode);
+        children.push_back(downNode);
+        n++;
     }
 
     //create new nodes based on the new refs, add to openList

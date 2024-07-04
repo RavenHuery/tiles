@@ -35,11 +35,44 @@ board::board() {
     setOrder();
 }
 
+board::board(int i = 9) {
+    //Create all the tiles
+    numberTile* one = new numberTile(1, 1);
+    numberTile* two = new numberTile(2, 2);
+    numberTile* three = new numberTile(3, 3);
+    numberTile* four = new numberTile(4, 4);
+    numberTile* five = new numberTile(5, 5);
+    numberTile* six = new numberTile(6, 6);
+    numberTile* seven = new numberTile(7, 7);
+    numberTile* eight = new numberTile(8, 8);
+    emptyTile* empty = new emptyTile(i);
+
+    //add them to vector in no particular order
+    order.push_back(one);
+    order.push_back(two);
+    order.push_back(three);
+    order.push_back(four);
+    order.push_back(five);
+    order.push_back(six);
+    order.push_back(seven);
+    order.push_back(eight);
+    order.push_back(empty);
+
+}
+
 board::~board() {
     for (auto t : order) {
         delete t;
     }
     order.clear();
+}
+
+bool board::operator==(board r) {
+    for (int i = 0; i < 9; i++) {
+        if (order[i]->getRef() != r.order[i]->getRef())
+            return false;
+    }
+    return true;
 }
 
 void board::printBoard() {

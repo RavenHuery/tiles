@@ -18,17 +18,17 @@ class node{
     node();
     //constructor that copies a board and generates
     //a heuristic value using the g value
-    node(vector<tileType*>&, vector<tileType*>&, int);
+    node(vector<tileType*>&, board&, int);
 
     //constructor that copies a board and generates
     //a heuristic value using the g value
-    node(node, vector<tileType*>&, int);
+    node(node, board&, int);
 
     //destructor
     ~node();
 
     //get h value for heuristic
-    int h(vector<tileType*>&, vector<tileType*>&);
+    int h(board&, board&);
 
     //absolute value calculator
     int abs(int);
@@ -42,15 +42,18 @@ class node{
     //Get node heuristic
     int getF();
 
-    //Set f value
-    void setF(vector<tileType*>&);
+    //Set f value using a board
+    void setF(board&);
 
-    vector<tileType*> getBoard();
+    // //Set f value using a vector of TileType
+    // void setF(board&);
+
+    board getBoard();
 
     //Function to set node state space
     void setBoard(vector<tileType*>);
 
-    vector<tileType*> state; //board state
+    board state; //board state
     int f; //heuristic value
     int g;
 };
@@ -74,13 +77,14 @@ class aiSolve{
 
     //Generate successor states from a given node
     //Addes new states to openList
-    void genSucc(node, vector<tileType*>&, int);
+    int genSucc(node, vector<tileType*>&, int);
 
     private:
-    vector<tileType*> goalState;
+    board goalState;
     node startState;
     vector<node> openList;
     vector<node> closedList;
+    vector<node> children;
 };
 
 #endif //AI_H
