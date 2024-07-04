@@ -8,6 +8,7 @@
 #include "game.h"
 #include "board.h"
 #include "moveTile.h"
+#include "aiSolve.h"
 
 using namespace std;
 
@@ -47,7 +48,14 @@ void game::takeAction() {
         giveUp = true;
     }
     if (select == "a" || select == "A") {
-        cout << "AI algorithm sounds\n\n" << endl;
+        //cout << "AI algorithm sounds\n\n" << endl;
+        int t = 0;
+        bool huh;
+        aiSolve robot;
+        huh = robot.aStar(gameBoard.order, t);
+        cout << "The AI can solve this board in " << t << " moves!" << endl;
+        cout << "algorithm returns " << huh << endl;
+        giveUp = true;
     }
 }
 

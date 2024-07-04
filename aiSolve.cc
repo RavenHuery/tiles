@@ -133,7 +133,7 @@ aiSolve::~aiSolve() {
     goalState.order.clear();
 }
 
-bool aiSolve::aStar(vector<tileType*> startBoard) {
+bool aiSolve::aStar(vector<tileType*> startBoard, int& turns) {
     //Initialize Open List
     // -Done during class constructor
     startState.setBoard(startBoard);
@@ -196,6 +196,7 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
                 }
             }
 
+            //Otherwise, add to openList
             if (addToList==true) {
                 openList.push_back(children[i]);
             }
@@ -203,7 +204,9 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
         children.clear();
 
         //add q to closed list
-        closedList.push_back(q);        
+        closedList.push_back(q);  
+
+        turns++;      
     }
     return false;
 }
