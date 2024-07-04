@@ -169,6 +169,7 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
 
         //for each successor
         for (int i = 0; i < n; i++) {
+            bool addToList = true;
 
             //a) if the successor is the goal then we are done
             if (children[i].getBoard() == goalState) {
@@ -179,12 +180,27 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
             //This is already done in the constructor for each child
 
             //c) if node has the same positioning as one in openList with higher f value, skip this one!
-                //Check ALL nodes in openList, if there is a duplicate node in openList with a LOWER f value... skip!
+            //Check ALL nodes in openList, if there is a duplicate node in openList with a LOWER f value... skip!
+            for (unsigned int j = 0; j < openList.size(); j++) {
+                if (children[i].getBoard() == openList[j].getBoard() && children[i].getF() > openList[j].getF()) {
+                    //skip this one. DON'T ADD IT TO OPEN LIST
+                    addToList = false;
+                }
+            }
 
             //d) If successor has same pos as node in CLOSED list with lower f value, skip this one!
-                //Check ALL nodes in closedList, if there is a duplicate with a LOWER h value then skip!
+            //Check ALL nodes in closedList, if there is a duplicate with a LOWER h value then skip!
+            for (unsigned int k = 0; k < closedList.size(); k++) {
+                if (children[i].getBoard() == closedList[k].getBoard() && children[i].getF() > closedList[k].getF()) {
+                    addToList = false;
+                }
+            }
+
+            if (addToList==true) {
+                openList.push_back(children[i]);
+            }
         }
-        
+        children.clear();
 
         //add q to closed list
         closedList.push_back(q);        
