@@ -169,17 +169,25 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
 
         //for each successor
         for (int i = 0; i < n; i++) {
-            if (children[i].getBoard() == goalState) //need overloaded == operator
-            //!!!!!BEGIN IMPLEMENTING STUFF HERE NEXT TIME!!!!!
+
+            //a) if the successor is the goal then we are done
+            if (children[i].getBoard() == goalState) {
+                return true; //This means we found the solution
+            }
+            
+            //b) compute g and h for successor (for f value)
+            //This is already done in the constructor for each child
+
+            //c) if node has the same positioning as one in openList with higher f value, skip this one!
+                //Check ALL nodes in openList, if there is a duplicate node in openList with a LOWER f value... skip!
+
+            //d) If successor has same pos as node in CLOSED list with lower f value, skip this one!
+                //Check ALL nodes in closedList, if there is a duplicate with a LOWER h value then skip!
         }
-        //a) if the successor is the goal then we are done
-        //b) compute g and h for successor (for f value)
-        //c) if node has the same positioning as one in openList with higher f value, skip this one!
-        //d) If successor has same pos as node in CLOSED list with lower f value, skip this one!
-        //</for>
+        
 
         //add q to closed list
-        
+        closedList.push_back(q);        
     }
     return false;
 }
