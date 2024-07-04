@@ -8,7 +8,6 @@
 #include "tileType.h"
 #include "board.h"
 #include "moveTile.h"
-#include "game.h"
 
 using namespace std;
 
@@ -73,7 +72,7 @@ class aiSolve{
     //from its correct position (h value)
     //........................................
     //Count sum of tile distance away from starting position (g value)
-    bool aStar(vector<tileType*>, int&);
+    bool aStar(board, int&);
 
     //Generate successor states from a given node
     //Addes new states to openList

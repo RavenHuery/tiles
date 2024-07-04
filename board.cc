@@ -32,7 +32,7 @@ board::board() {
     order.push_back(empty);
     
     //set tile order using function
-    setOrder();
+    //setOrder();
 }
 
 board::board(int i = 9) {
@@ -77,7 +77,7 @@ bool board::operator==(board r) {
 
 void board::printBoard() {
     cout << "\n------------------------------\n" << endl;
-
+    //I SUSPECT ITS SOMETHING TO DO WITH getOrder function!
     vector<tileType*> pOrder;
     getOrder(order, pOrder);
 

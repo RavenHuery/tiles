@@ -101,10 +101,10 @@ void node::setBoard(vector<tileType*> newBoard) {
     }
 }
 
-//When the vector is creating StartState node it does not have the required parameters!
-//This constructor needs to be changed
+
 aiSolve::aiSolve() {
     //Create a new vector that is the goal state of the search
+    cout << "We will now build aiSolve object!!!" << endl;
     numberTile* one = new numberTile(1, 1);
     numberTile* two = new numberTile(2, 2);
     numberTile* three = new numberTile(3, 3);
@@ -115,6 +115,8 @@ aiSolve::aiSolve() {
     numberTile* eight = new numberTile(8, 8);
     emptyTile* empty = new emptyTile(9);
 
+    cout << "tiles have been created! Now adding to goalState!" << endl;
+
     goalState.order.push_back(one);
     goalState.order.push_back(two);
     goalState.order.push_back(three);
@@ -124,6 +126,8 @@ aiSolve::aiSolve() {
     goalState.order.push_back(seven);
     goalState.order.push_back(eight);
     goalState.order.push_back(empty);
+
+    cout << "YIPPIE! Construction of aiSolve is now complete!" << endl;
 }
 
 aiSolve::~aiSolve() {
@@ -133,23 +137,30 @@ aiSolve::~aiSolve() {
     goalState.order.clear();
 }
 
-bool aiSolve::aStar(vector<tileType*> startBoard, int& turns) {
+bool aiSolve::aStar(const board startBoard, int& turns) {
     //Initialize Open List
     // -Done during class constructor
-    startState.setBoard(startBoard);
+    cout << "OK! Now it is time to set the startState!" << endl;
+    startState.setBoard(startBoard.order);
+    cout << "startState.setBoard(startBoard.order); is ok!" << endl;
     startState.setG(0);
+    cout << "startState.setG(0); is ok!" << endl;
     startState.setF(startState.state);
+    cout << "startState.setF(startState.state); is ok!" << endl;
 
     //Initialize closed list
     // -Done during class constructor
 
     //Put starting node in open
     openList.push_back(startState);
+    cout << "startState added to openList" << endl;
 
     //While open list is NOT empty
+    cout << "while open list is not empty! <FOR LOOP>" << endl;
     while (!openList.empty()) {
         //Find node with lowest heuristic value
         int leastF = INT_MAX; 
+        cout << "leastF = INT_MAX" << endl;
         int leastFpos;
         for (unsigned int i = 0; i < openList.size(); i++) {
             if (openList[i].getF() < leastF) {
@@ -157,12 +168,17 @@ bool aiSolve::aStar(vector<tileType*> startBoard, int& turns) {
                 leastFpos = i;
             }
         }
+        cout << "WE FOUND IT! We found the one with the lowest F value!" << endl;
         //Call the current node q
         node q = openList[leastFpos];
+        cout << "assigned the lowest to 'q'" << endl;
         //Print board of q
+        q.state.printBoard(); // <------------ HERE IS WHERE IT SEGFAULTS!!!
 
         //pop q from open list
         openList.erase(openList.begin()+leastFpos);
+        cout << "now we have removed q from openList" << endl;
+
 
         //Generate successors to q 
         int n = genSucc(q, goalState, q.getG());

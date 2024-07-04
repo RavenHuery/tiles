@@ -15,7 +15,7 @@ using namespace std;
 game::game() {
     isVictorious = isVictory();
     giveUp = false;
-
+    gameBoard.setOrder();
 }
 
 game::~game() {
@@ -52,7 +52,8 @@ void game::takeAction() {
         int t = 0;
         bool huh;
         aiSolve robot;
-        huh = robot.aStar(gameBoard.order, t);
+        cout << "now we will call aStar function!" << endl;
+        huh = robot.aStar(gameBoard, t); // <---THIS IS WHERE WE CALL A*
         cout << "The AI can solve this board in " << t << " moves!" << endl;
         cout << "algorithm returns " << huh << endl;
         giveUp = true;

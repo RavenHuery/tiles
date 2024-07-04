@@ -38,10 +38,10 @@ class board {
     //Edits array so that int gets removed
     void adjAvailable(vector<int> &, int);
 
-    protected:
-
     // sets the order of the tiles on board. 
     void setOrder();
+
+    protected:
 
     //Gets the order of tiles based on ref number
     //A vector of pointers!
