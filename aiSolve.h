@@ -77,7 +77,7 @@ class aiSolve{
 
     //Generate successor states from a given node
     //Addes new states to openList
-    int genSucc(node, vector<tileType*>&, int);
+    int genSucc(node, board&, int);
 
     private:
     board goalState;

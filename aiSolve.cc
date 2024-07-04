@@ -138,7 +138,7 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
     // -Done during class constructor
     startState.setBoard(startBoard);
     startState.setG(0);
-    startState.setF(startBoard.state.order);
+    startState.setF(startState.state);
 
     //Initialize closed list
     // -Done during class constructor
@@ -169,7 +169,8 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
 
         //for each successor
         for (int i = 0; i < n; i++) {
-            if (children[i].getBoard() == goalState.getBoard()) //need overloaded == operator
+            if (children[i].getBoard() == goalState) //need overloaded == operator
+            //!!!!!BEGIN IMPLEMENTING STUFF HERE NEXT TIME!!!!!
         }
         //a) if the successor is the goal then we are done
         //b) compute g and h for successor (for f value)
@@ -184,13 +185,13 @@ bool aiSolve::aStar(vector<tileType*> startBoard) {
 }
 
 //Generate children with a given parent UwU
-int aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
+int aiSolve::genSucc(node parent, board& goal, int parentG) {
     //Find emptyTile in parent.state
     int n = 0;
     int emptyRef;
     moveTile moveOp;
     for (int i = 0; i < 9; i++) {
-        if (parent.state[i]->getValue() == -1) {
+        if (parent.state.order[i]->getValue() == -1) {
             emptyRef = i;
             break;
         }
@@ -200,7 +201,7 @@ int aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
     //generate ref - 3
     if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
         node upNode(parent, goal, parentG + 1);
-        moveOp.shiftTile(upNode.state[emptyRef], upNode.state[emptyRef - 3]);
+        moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
         upNode.setF(goal);
         children.push_back(upNode);
         n++;
@@ -209,7 +210,7 @@ int aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
     //generate ref - 1
     if (emptyRef != 1 || emptyRef != 4 || emptyRef != 7) {
         node leftNode(parent, goal, parentG + 1);
-        moveOp.shiftTile(leftNode.state[emptyRef], leftNode.state[emptyRef - 1]);
+        moveOp.shiftTile(leftNode.state.order[emptyRef], leftNode.state.order[emptyRef - 1]);
         leftNode.setF(goal);
         children.push_back(leftNode);
         n++;
@@ -218,7 +219,7 @@ int aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
     //generate ref + 1
     if (emptyRef != 3 || emptyRef != 6 || emptyRef != 9) {
         node rightNode(parent, goal, parentG + 1);
-        moveOp.shiftTile(rightNode.state[emptyRef], rightNode.state[emptyRef +1]);
+        moveOp.shiftTile(rightNode.state.order[emptyRef], rightNode.state.order[emptyRef +1]);
         rightNode.setF(goal);
         children.push_back(rightNode);
         n++;
@@ -227,12 +228,12 @@ int aiSolve::genSucc(node parent, vector<tileType*>& goal, int parentG) {
     //generate ref + 3
     if (emptyRef != 7 || emptyRef != 8 || emptyRef != 9) {
         node downNode(parent, goal, parentG + 1);
-        moveOp.shiftTile(downNode.state[emptyRef], downNode.state[emptyRef + 3]);
+        moveOp.shiftTile(downNode.state.order[emptyRef], downNode.state.order[emptyRef + 3]);
         downNode.setF(goal);
         children.push_back(downNode);
         n++;
     }
 
     //create new nodes based on the new refs, add to openList
-    
+    return n;
 }
