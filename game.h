@@ -30,6 +30,9 @@ class game {
     //Calls to start the game
     void playGame();
 
+    //returns the gameboard
+    board getGameBoard();
+
     protected:
     board gameBoard;
     bool isVictorious;

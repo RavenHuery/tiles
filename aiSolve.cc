@@ -137,7 +137,7 @@ aiSolve::~aiSolve() {
     goalState.order.clear();
 }
 
-bool aiSolve::aStar(const board startBoard, int& turns) {
+bool aiSolve::aStar(board startBoard, int& turns) {
     //Initialize Open List
     // -Done during class constructor
     cout << "OK! Now it is time to set the startState!" << endl;

@@ -53,7 +53,7 @@ void game::takeAction() {
         bool huh;
         aiSolve robot;
         cout << "now we will call aStar function!" << endl;
-        huh = robot.aStar(gameBoard, t); // <---THIS IS WHERE WE CALL A*
+        huh = robot.aStar(getGameBoard(), t); // <---THIS IS WHERE WE CALL A*
         cout << "The AI can solve this board in " << t << " moves!" << endl;
         cout << "algorithm returns " << huh << endl;
         giveUp = true;
@@ -107,4 +107,8 @@ void game::playGame() {
             cout << "\n\n\nCongratulations, you did it! \n\n\n" << endl;
         }
     }
+}
+
+board game::getGameBoard() {
+    return gameBoard;
 }

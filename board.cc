@@ -77,10 +77,14 @@ bool board::operator==(board r) {
 
 void board::printBoard() {
     cout << "\n------------------------------\n" << endl;
-    //I SUSPECT ITS SOMETHING TO DO WITH getOrder function!
-    vector<tileType*> pOrder;
-    getOrder(order, pOrder);
 
+    vector<tileType*> pOrder;
+    cout << "pOrder vector is created!" << endl;
+    getOrder(this->order, pOrder);
+    cout << "we have now gotten the order to print out!" << endl;
+
+
+    //IT IS SOMETHING TO DO WITH THE BELOW CODE!!!!!
     cout << " " << pOrder[0]->getValue() << " | " << pOrder[1]->getValue() << " | " << pOrder[2]->getValue() << '\n'
          << "-----------\n"
          << " " << pOrder[3]->getValue() << " | " << pOrder[4]->getValue() << " | " << pOrder[5]->getValue() << '\n'
