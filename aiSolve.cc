@@ -182,12 +182,15 @@ bool aiSolve::aStar(board startBoard, int& turns) {
 
 
         //Generate successors to q 
-        int n = genSucc(q, goalState, q.getG());
+        // Parent is q, goal is goalState, parentG is g.getG()
+        int n = genSucc(q, goalState, q.getG()); // <------------ HERE IS WHERE IT SEGFAULTS!!!
+
+        cout << "successors to q are generated" << endl;
 
         //for each successor
         for (int i = 0; i < n; i++) {
             bool addToList = true;
-
+            cout << "Looking at successor " << i << endl;
             //a) if the successor is the goal then we are done
             if (children[i].getBoard() == goalState) {
                 return true; //This means we found the solution
