@@ -97,7 +97,7 @@ board node::getBoard() {
 
 void node::setBoard(vector<tileType*> newBoard) {
     for (int i = 0; i < 9; i++) {
-        state.order.push_back(newBoard[i]);
+        this->state.order[i] = newBoard[i];
     }
 }
 
@@ -169,6 +169,7 @@ bool aiSolve::aStar(board startBoard, int& turns) {
             }
         }
         cout << "WE FOUND IT! We found the one with the lowest F value!" << endl;
+        cout << "It is " << leastFpos << endl;
         //Call the current node q
         node q = openList[leastFpos];
         cout << "assigned the lowest to 'q'" << endl;
