@@ -46,10 +46,15 @@ node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
     setF(goal);
 }
 
+//Copy constructor that take a node, a goal state and a g value
 node::node(node copyNode, board& goal, int gVal) {
+    cout << "Creating new board" << endl;
     setBoard(copyNode.getBoard().order); // <- HMMMMMM
+    cout << "Creating g value" << endl;
     setG(gVal);
+    cout << "setting f value" << endl;
     setF(goal);
+    cout << "Node finished creating!" << endl;
 }
 
 node::~node() {
@@ -248,17 +253,21 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     //Generate new refs, discard those that are out of range
     cout << "Time to generate successors" << endl;
     //generate ref - 3
-    if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
+    if (emptyRef != 0 || emptyRef != 1 || emptyRef != 2) { //Check if its in range
         cout << "Generating ref - 3 successor" << endl;
-        node upNode(parent, goal, parentG + 1);
+        node upNode(parent, goal, parentG + 1); // <--- here is the error!
+        cout << "The new node has been created" << endl;
         moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
+        cout << "Shifting tiles in new node's board" << endl;
         upNode.setF(goal);
+        cout << "New node's F value set" << endl;
         children.push_back(upNode);
+        cout << "Added new node to children list" << endl;
         n++;
     }
 
     //generate ref - 1
-    if (emptyRef != 1 || emptyRef != 4 || emptyRef != 7) {
+    if (emptyRef != 0 || emptyRef != 3 || emptyRef != 6) {
         cout << "Generating ref - 3 successor" << endl;
         node leftNode(parent, goal, parentG + 1);
         moveOp.shiftTile(leftNode.state.order[emptyRef], leftNode.state.order[emptyRef - 1]);
@@ -268,7 +277,7 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     }
 
     //generate ref + 1
-    if (emptyRef != 3 || emptyRef != 6 || emptyRef != 9) {
+    if (emptyRef != 2 || emptyRef != 5 || emptyRef != 8) {
         cout << "Generating ref - 3 successor" << endl;
         node rightNode(parent, goal, parentG + 1);
         moveOp.shiftTile(rightNode.state.order[emptyRef], rightNode.state.order[emptyRef +1]);
@@ -278,7 +287,7 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     }
 
     //generate ref + 3
-    if (emptyRef != 7 || emptyRef != 8 || emptyRef != 9) {
+    if (emptyRef != 6 || emptyRef != 7 || emptyRef != 8) {
         cout << "Generating ref - 3 successor" << endl;
         node downNode(parent, goal, parentG + 1);
         moveOp.shiftTile(downNode.state.order[emptyRef], downNode.state.order[emptyRef + 3]);
