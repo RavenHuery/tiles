@@ -47,7 +47,7 @@ node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
 }
 
 node::node(node copyNode, board& goal, int gVal) {
-    setBoard(copyNode.getBoard().order);
+    setBoard(copyNode.getBoard().order); // <- HMMMMMM
     setG(gVal);
     setF(goal);
 }
@@ -237,16 +237,19 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     int n = 0;
     int emptyRef;
     moveTile moveOp;
+    cout << "its time to find the empty tile!" << endl;
     for (int i = 0; i < 9; i++) {
         if (parent.state.order[i]->getValue() == -1) {
             emptyRef = i;
             break;
         }
     }
+    cout << "THERE IT IS! Its " << emptyRef << endl;
     //Generate new refs, discard those that are out of range
-
+    cout << "Time to generate successors" << endl;
     //generate ref - 3
     if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
+        cout << "Generating ref - 3 successor" << endl;
         node upNode(parent, goal, parentG + 1);
         moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
         upNode.setF(goal);
@@ -256,6 +259,7 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
 
     //generate ref - 1
     if (emptyRef != 1 || emptyRef != 4 || emptyRef != 7) {
+        cout << "Generating ref - 3 successor" << endl;
         node leftNode(parent, goal, parentG + 1);
         moveOp.shiftTile(leftNode.state.order[emptyRef], leftNode.state.order[emptyRef - 1]);
         leftNode.setF(goal);
@@ -265,6 +269,7 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
 
     //generate ref + 1
     if (emptyRef != 3 || emptyRef != 6 || emptyRef != 9) {
+        cout << "Generating ref - 3 successor" << endl;
         node rightNode(parent, goal, parentG + 1);
         moveOp.shiftTile(rightNode.state.order[emptyRef], rightNode.state.order[emptyRef +1]);
         rightNode.setF(goal);
@@ -274,13 +279,14 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
 
     //generate ref + 3
     if (emptyRef != 7 || emptyRef != 8 || emptyRef != 9) {
+        cout << "Generating ref - 3 successor" << endl;
         node downNode(parent, goal, parentG + 1);
         moveOp.shiftTile(downNode.state.order[emptyRef], downNode.state.order[emptyRef + 3]);
         downNode.setF(goal);
         children.push_back(downNode);
         n++;
     }
-
+    cout << "All successors have been made!" << endl;
     //create new nodes based on the new refs, add to openList
     return n;
 }

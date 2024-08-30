@@ -83,8 +83,6 @@ void board::printBoard() {
     getOrder(this->order, pOrder);
     cout << "we have now gotten the order to print out!" << endl;
 
-
-    //IT IS SOMETHING TO DO WITH THE BELOW CODE!!!!!
     cout << " " << pOrder[0]->getValue() << " | " << pOrder[1]->getValue() << " | " << pOrder[2]->getValue() << '\n'
          << "-----------\n"
          << " " << pOrder[3]->getValue() << " | " << pOrder[4]->getValue() << " | " << pOrder[5]->getValue() << '\n'
