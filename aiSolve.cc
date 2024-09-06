@@ -36,21 +36,27 @@ node::node() {
     newBoard.order.push_back(seven);
     newBoard.order.push_back(eight);
     newBoard.order.push_back(empty);
-    setBoard(newBoard.order);
+    //setBoard(newBoard.order);
+    setBoard(newBoard);
     setF(newBoard);
 }
 
-node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
-    setBoard(newBoard);
-    setG(gVal);
-    setF(goal);
-}
+// node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
+//     setBoard(newBoard);
+//     setG(gVal);
+//     setF(goal);
+// }
+
+// THERE IS SOMETHING FUNDAMENTALLY WRONG WITH HOW WE CREATE NEW NODES
+// BUT I DON'T KNOW WHAT IT IS..... COULD BE SOMETHING TO DO WITH SET BOARD...
 
 //Copy constructor that take a node, a goal state and a g value
 node::node(node copyNode, board& goal, int gVal) {
     cout << "Creating new board" << endl;
     board tempBoard = setupNewBoard(copyNode);
-    setBoard(tempBoard.order); // <- HMMMMMM
+    cout << "We created a temp board first, now implementing the real board" << endl;
+    //setBoard(tempBoard.order); // <- HMMMMMM
+    setBoard(tempBoard);
     cout << "Creating g value" << endl;
     setG(gVal);
     cout << "setting f value" << endl;
@@ -118,9 +124,9 @@ board node::getBoard() {
     return state;
 }
 
-void node::setBoard(vector<tileType*> newBoard) {
+void node::setBoard(board newBoard) {
     for (int i = 0; i < 9; i++) {
-        this->state.order[i] = newBoard[i];
+        this->state.order[i] = newBoard.order[i];
     }
 }
 

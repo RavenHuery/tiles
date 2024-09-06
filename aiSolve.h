@@ -15,9 +15,9 @@ class node{
     public:
 
     node();
-    //constructor that copies a board and generates
-    //a heuristic value using the g value
-    node(vector<tileType*>&, board&, int);
+    // //constructor that copies a board and generates
+    // //a heuristic value using the g value
+    // node(vector<tileType*>&, board&, int);
 
     //constructor that copies a board and generates
     //a heuristic value using the g value
@@ -50,7 +50,7 @@ class node{
     board getBoard();
 
     //Function to set node state space
-    void setBoard(vector<tileType*>);
+    void setBoard(node);
 
     board state; //board state
     int f; //heuristic value
