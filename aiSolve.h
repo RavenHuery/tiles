@@ -44,8 +44,8 @@ class node{
     //Set f value using a board
     void setF(board&);
 
-    // //Set f value using a vector of TileType
-    // void setF(board&);
+    // Setup a board for a new Node
+    board setupNewBoard(node);
 
     board getBoard();
 

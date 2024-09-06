@@ -49,7 +49,8 @@ node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
 //Copy constructor that take a node, a goal state and a g value
 node::node(node copyNode, board& goal, int gVal) {
     cout << "Creating new board" << endl;
-    setBoard(copyNode.getBoard().order); // <- HMMMMMM
+    board tempBoard = setupNewBoard(copyNode);
+    setBoard(tempBoard.order); // <- HMMMMMM
     cout << "Creating g value" << endl;
     setG(gVal);
     cout << "setting f value" << endl;
@@ -94,6 +95,23 @@ int node::getF() {
 
 void node::setF(board& goal) {
     f = h(state, goal) + g;
+}
+
+// Setup a board for a new Node
+board node::setupNewBoard(node oldNode) {
+    board newBoard(9); //Use temp board and then set class member with temp.
+    for (int i = 0; i < 9; i++) {
+        if (oldNode.state.order[i]->isNumber()) { //If it is a number tile
+            numberTile* numerical = new numberTile(oldNode.state.order[i]->getRef(), oldNode.state.order[i]->getValue());
+            newBoard.order.push_back(numerical);
+        }
+        else {
+            emptyTile* empty = new emptyTile(oldNode.state.order[i]->getRef());
+            newBoard.order.push_back(empty);
+        }
+    }
+
+    return newBoard;
 }
 
 board node::getBoard() {
