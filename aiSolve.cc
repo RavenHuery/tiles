@@ -47,7 +47,7 @@ node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
 }
 
 node::node(node copyNode, board& goal, int gVal) {
-    setBoard(copyNode.getBoard().order); // <- HMMMMMM
+    setBoard(copyNode.getBoard().order); // <- HMMMMMMcd 
     setG(gVal);
     setF(goal);
 }
@@ -140,27 +140,21 @@ aiSolve::~aiSolve() {
 bool aiSolve::aStar(board startBoard, int& turns) {
     //Initialize Open List
     // -Done during class constructor
-    cout << "OK! Now it is time to set the startState!" << endl;
     startState.setBoard(startBoard.order);
-    cout << "startState.setBoard(startBoard.order); is ok!" << endl;
     startState.setG(0);
-    cout << "startState.setG(0); is ok!" << endl;
     startState.setF(startState.state);
-    cout << "startState.setF(startState.state); is ok!" << endl;
 
     //Initialize closed list
     // -Done during class constructor
 
     //Put starting node in open
     openList.push_back(startState);
-    cout << "startState added to openList" << endl;
 
     //While open list is NOT empty
-    cout << "while open list is not empty! <FOR LOOP>" << endl;
     while (!openList.empty()) {
+
         //Find node with lowest heuristic value
         int leastF = INT_MAX; 
-        cout << "leastF = INT_MAX" << endl;
         int leastFpos;
         for (unsigned int i = 0; i < openList.size(); i++) {
             if (openList[i].getF() < leastF) {
@@ -168,13 +162,12 @@ bool aiSolve::aStar(board startBoard, int& turns) {
                 leastFpos = i;
             }
         }
-        cout << "WE FOUND IT! We found the one with the lowest F value!" << endl;
-        cout << "It is " << leastFpos << endl;
+        
         //Call the current node q
         node q = openList[leastFpos];
-        cout << "assigned the lowest to 'q'" << endl;
+
         //Print board of q
-        q.state.printBoard(); // <------------ HERE IS WHERE IT SEGFAULTS!!!
+        q.state.printBoard(); 
 
         //pop q from open list
         openList.erase(openList.begin()+leastFpos);
@@ -250,11 +243,16 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     //generate ref - 3
     if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
         cout << "Generating ref - 3 successor" << endl;
-        node upNode(parent, goal, parentG + 1);
+        node upNode(parent, goal, parentG + 1); // Node, Board&, int
+        cout << "New node created called upNode" << endl;
         moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
+        cout << "Shifted the tile so to create successor" << endl;
         upNode.setF(goal);
+        cout << "f value specified" << endl;
         children.push_back(upNode);
+        cout << "upNode added to children list" << endl;
         n++;
+        cout << "n++" << endl;
     }
 
     //generate ref - 1

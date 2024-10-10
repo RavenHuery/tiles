@@ -79,9 +79,7 @@ void board::printBoard() {
     cout << "\n------------------------------\n" << endl;
 
     vector<tileType*> pOrder;
-    cout << "pOrder vector is created!" << endl;
     getOrder(this->order, pOrder);
-    cout << "we have now gotten the order to print out!" << endl;
 
     cout << " " << pOrder[0]->getValue() << " | " << pOrder[1]->getValue() << " | " << pOrder[2]->getValue() << '\n'
          << "-----------\n"
