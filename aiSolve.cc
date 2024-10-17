@@ -36,20 +36,36 @@ node::node() {
     newBoard.order.push_back(seven);
     newBoard.order.push_back(eight);
     newBoard.order.push_back(empty);
-    setBoard(newBoard.order);
+    //setBoard(newBoard.order);
+    setBoard(newBoard);
     setF(newBoard);
 }
 
-node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
-    setBoard(newBoard);
-    setG(gVal);
-    setF(goal);
-}
+// node::node(vector<tileType*>& newBoard, board& goal, int gVal) {
+//     setBoard(newBoard);
+//     setG(gVal);
+//     setF(goal);
+// }
 
+// THERE IS SOMETHING FUNDAMENTALLY WRONG WITH HOW WE CREATE NEW NODES
+// BUT I DON'T KNOW WHAT IT IS..... COULD BE SOMETHING TO DO WITH SET BOARD...
+
+//Copy constructor that take a node, a goal state and a g value
 node::node(node copyNode, board& goal, int gVal) {
+<<<<<<< HEAD
     setBoard(copyNode.getBoard().order); // <- HMMMMMMcd 
+=======
+    cout << "Creating new board" << endl;
+    board tempBoard = setupNewBoard(copyNode);
+    cout << "We created a temp board first, now implementing the real board" << endl;
+    //setBoard(tempBoard.order); // <- HMMMMMM
+    setBoard(tempBoard);
+    cout << "Creating g value" << endl;
+>>>>>>> 7acd85d93139e7842c36fb3166741f255101ee1d
     setG(gVal);
+    cout << "setting f value" << endl;
     setF(goal);
+    cout << "Node finished creating!" << endl;
 }
 
 node::~node() {
@@ -91,13 +107,30 @@ void node::setF(board& goal) {
     f = h(state, goal) + g;
 }
 
+// Setup a board for a new Node
+board node::setupNewBoard(node oldNode) {
+    board newBoard(9); //Use temp board and then set class member with temp.
+    for (int i = 0; i < 9; i++) {
+        if (oldNode.state.order[i]->isNumber()) { //If it is a number tile
+            numberTile* numerical = new numberTile(oldNode.state.order[i]->getRef(), oldNode.state.order[i]->getValue());
+            newBoard.order.push_back(numerical);
+        }
+        else {
+            emptyTile* empty = new emptyTile(oldNode.state.order[i]->getRef());
+            newBoard.order.push_back(empty);
+        }
+    }
+
+    return newBoard;
+}
+
 board node::getBoard() {
     return state;
 }
 
-void node::setBoard(vector<tileType*> newBoard) {
+void node::setBoard(board newBoard) {
     for (int i = 0; i < 9; i++) {
-        this->state.order[i] = newBoard[i];
+        this->state.order[i] = newBoard.order[i];
     }
 }
 
@@ -241,8 +274,9 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     //Generate new refs, discard those that are out of range
     cout << "Time to generate successors" << endl;
     //generate ref - 3
-    if (emptyRef != 1 || emptyRef != 2 || emptyRef != 3) { //Check if its in range
+    if (emptyRef != 0 || emptyRef != 1 || emptyRef != 2) { //Check if its in range
         cout << "Generating ref - 3 successor" << endl;
+<<<<<<< HEAD
         node upNode(parent, goal, parentG + 1); // Node, Board&, int
         cout << "New node created called upNode" << endl;
         moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
@@ -251,12 +285,22 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
         cout << "f value specified" << endl;
         children.push_back(upNode);
         cout << "upNode added to children list" << endl;
+=======
+        node upNode(parent, goal, parentG + 1); // <--- here is the error!
+        cout << "The new node has been created" << endl;
+        moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
+        cout << "Shifting tiles in new node's board" << endl;
+        upNode.setF(goal);
+        cout << "New node's F value set" << endl;
+        children.push_back(upNode);
+        cout << "Added new node to children list" << endl;
+>>>>>>> 7acd85d93139e7842c36fb3166741f255101ee1d
         n++;
         cout << "n++" << endl;
     }
 
     //generate ref - 1
-    if (emptyRef != 1 || emptyRef != 4 || emptyRef != 7) {
+    if (emptyRef != 0 || emptyRef != 3 || emptyRef != 6) {
         cout << "Generating ref - 3 successor" << endl;
         node leftNode(parent, goal, parentG + 1);
         moveOp.shiftTile(leftNode.state.order[emptyRef], leftNode.state.order[emptyRef - 1]);
@@ -266,7 +310,7 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     }
 
     //generate ref + 1
-    if (emptyRef != 3 || emptyRef != 6 || emptyRef != 9) {
+    if (emptyRef != 2 || emptyRef != 5 || emptyRef != 8) {
         cout << "Generating ref - 3 successor" << endl;
         node rightNode(parent, goal, parentG + 1);
         moveOp.shiftTile(rightNode.state.order[emptyRef], rightNode.state.order[emptyRef +1]);
@@ -276,7 +320,7 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     }
 
     //generate ref + 3
-    if (emptyRef != 7 || emptyRef != 8 || emptyRef != 9) {
+    if (emptyRef != 6 || emptyRef != 7 || emptyRef != 8) {
         cout << "Generating ref - 3 successor" << endl;
         node downNode(parent, goal, parentG + 1);
         moveOp.shiftTile(downNode.state.order[emptyRef], downNode.state.order[emptyRef + 3]);
