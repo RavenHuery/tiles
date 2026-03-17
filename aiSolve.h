@@ -50,7 +50,7 @@ class node{
     board getBoard();
 
     //Function to set node state space
-    void setBoard(node);
+    void setBoard(board);
 
     board state; //board state
     int f; //heuristic value

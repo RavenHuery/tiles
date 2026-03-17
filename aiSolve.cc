@@ -52,7 +52,8 @@ node::node() {
 
 //Copy constructor that take a node, a goal state and a g value
 node::node(node copyNode, board& goal, int gVal) {
-    setBoard(copyNode.getBoard().order); // <- HMMMMMMcd 
+    //setBoard(copyNode.getBoard().order); // <- HMMMMMMcd 
+    setBoard(copyNode.getBoard());
     setG(gVal);
     cout << "setting f value" << endl;
     setF(goal);
@@ -164,7 +165,8 @@ aiSolve::~aiSolve() {
 bool aiSolve::aStar(board startBoard, int& turns) {
     //Initialize Open List
     // -Done during class constructor
-    startState.setBoard(startBoard.order);
+    //startState.setBoard(startBoard.order);
+    startState.setBoard(startBoard);
     startState.setG(0);
     startState.setF(startState.state);
 
@@ -267,7 +269,6 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
     //generate ref - 3
     if (emptyRef != 0 || emptyRef != 1 || emptyRef != 2) { //Check if its in range
         cout << "Generating ref - 3 successor" << endl;
-<<<<<<< HEAD
         node upNode(parent, goal, parentG + 1); // Node, Board&, int
         cout << "New node created called upNode" << endl;
         moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
@@ -276,16 +277,6 @@ int aiSolve::genSucc(node parent, board& goal, int parentG) {
         cout << "f value specified" << endl;
         children.push_back(upNode);
         cout << "upNode added to children list" << endl;
-=======
-        node upNode(parent, goal, parentG + 1); // <--- here is the error!
-        cout << "The new node has been created" << endl;
-        moveOp.shiftTile(upNode.state.order[emptyRef], upNode.state.order[emptyRef - 3]);
-        cout << "Shifting tiles in new node's board" << endl;
-        upNode.setF(goal);
-        cout << "New node's F value set" << endl;
-        children.push_back(upNode);
-        cout << "Added new node to children list" << endl;
->>>>>>> 7acd85d93139e7842c36fb3166741f255101ee1d
         n++;
         cout << "n++" << endl;
     }
