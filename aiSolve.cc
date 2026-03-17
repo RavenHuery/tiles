@@ -52,16 +52,7 @@ node::node() {
 
 //Copy constructor that take a node, a goal state and a g value
 node::node(node copyNode, board& goal, int gVal) {
-<<<<<<< HEAD
     setBoard(copyNode.getBoard().order); // <- HMMMMMMcd 
-=======
-    cout << "Creating new board" << endl;
-    board tempBoard = setupNewBoard(copyNode);
-    cout << "We created a temp board first, now implementing the real board" << endl;
-    //setBoard(tempBoard.order); // <- HMMMMMM
-    setBoard(tempBoard);
-    cout << "Creating g value" << endl;
->>>>>>> 7acd85d93139e7842c36fb3166741f255101ee1d
     setG(gVal);
     cout << "setting f value" << endl;
     setF(goal);

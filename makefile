@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -Wextra -std=c++11
 SRCS = game.cc board.cc moveTile.cc tileType.cc aiSolve.cc main.cc 
 
 # Object files
-OBJS = game.obj board.obj moveTile.obj tileType.obj aiSolve.obj main.obj
+OBJS = game.o board.o moveTile.o tileType.o aiSolve.o main.o
 
 # Header files
 HDRS = game.h board.h moveTile.h tileType.h aiSolve.h
@@ -21,9 +21,8 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Rule to build object files
-%.obj: %.cc $(HDRS)
-$(OBJS): %.obj: %.cc
-	$(CXX) $(CXXFLAGS) -c -o $@ $^
+%.o: %.cc $(HDRS)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 # Rule to clean the generated files
 clean:
